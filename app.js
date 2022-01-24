@@ -4,6 +4,11 @@ var fs = require('fs');
 const open = require('open');
 const si = require('systeminformation');
 
+let values = getJson();
+// console.log(values.switches.firePit);
+// values.switches.firePit = true;
+// fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
+
 // Create a function to handle every HTTP request
 function handler(req, res) {
 
@@ -25,7 +30,7 @@ function handler(req, res) {
             //grab form data as string
             var formdata = chunk.toString();
             console.log("Formdata: " + formdata);
-            
+
             if (formdata == "allOn") {
                 allOn();
                 form = "All lights are on";
@@ -58,6 +63,11 @@ function allOn() {
 function allOff() {
     console.log("All lights are off");
 }
+
+function getJson() {
+    return json = JSON.parse(fs.readFileSync(__dirname + '/values.json', 'utf8'));
+}
+
 
 
 // Create a server that invokes the `handler` function upon receiving a request

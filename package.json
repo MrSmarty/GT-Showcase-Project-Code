@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "open": "^8.4.0",
+    "si": "^2.0.0",
+    "systeminformation": "^5.10.7"
+  }
+}

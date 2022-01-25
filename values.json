@@ -7,6 +7,6 @@
     "switches": {
         "allOn": false,
         "firepit": false,
-        "path": true
+        "path": false
     }
 }

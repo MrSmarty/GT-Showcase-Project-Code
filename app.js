@@ -44,8 +44,17 @@ function handler(req, res) {
             } else {
                 form = "Input recieved: " + formdata;
                 var val = formdata.split("&");
-                for (var i = 0; i < val.length; i++) {
-                    values.switches[val[i]] = true;
+                // for (var i = 0; i < val.length; i++) {
+                //     values.switches[val[i]] = true;
+                // }
+                console.log(values.switches[values.switchNames[0]]);
+
+                for (var i = 0; i < values.switchNames.length; i++) {
+                    if (val.includes(values.switches[values.switchNames[i]])) {
+                        values.switches[values.switchNames[i]] = true;
+                    } else {
+                        values.switches[values.switchNames[i]] = false;
+                    }
                 }
                 fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
             }

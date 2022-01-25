@@ -2,11 +2,13 @@
     "switchNames": [
         "allOn",
         "firepit",
-        "path"
+        "path",
+        "pondOne"
     ],
     "switches": {
         "allOn": false,
-        "firepit": false,
-        "path": false
+        "firepit": true,
+        "path": true,
+        "pondOne": false
     }
 }

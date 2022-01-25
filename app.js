@@ -9,7 +9,7 @@ let values = getJson();
 // values.switches.firePit = true;
 // fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
 
-console.log(getValues());
+// console.log(getValues());
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
@@ -50,7 +50,7 @@ function handler(req, res) {
                 console.log(values.switches[values.switchNames[0]]);
 
                 for (var i = 0; i < values.switchNames.length; i++) {
-                    if (val.includes(values.switches[values.switchNames[i]])) {
+                    if (val.includes(values.switchNames[i])) {
                         values.switches[values.switchNames[i]] = true;
                     } else {
                         values.switches[values.switchNames[i]] = false;

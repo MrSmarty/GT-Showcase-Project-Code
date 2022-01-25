@@ -1,7 +1,12 @@
 {
+    "switchNames": [
+        "allOn",
+        "firepit",
+        "path"
+    ],
     "switches": {
         "allOn": false,
-        "firePit": true,
-        "path": false
+        "firepit": false,
+        "path": true
     }
 }

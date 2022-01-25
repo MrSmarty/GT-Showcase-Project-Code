@@ -1,4 +1,4 @@
-// 192.168.1.156
+// PC: 192.168.1.156
 var http = require('http');
 var fs = require('fs');
 const open = require('open');
@@ -8,6 +8,8 @@ let values = getJson();
 // console.log(values.switches.firePit);
 // values.switches.firePit = true;
 // fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
+
+console.log(getValues());
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
@@ -31,7 +33,9 @@ function handler(req, res) {
             var formdata = chunk.toString();
             console.log("Formdata: " + formdata);
 
-            if (formdata == "allOn") {
+            if (formdata == "getValues") {
+                form = getValues();
+            } else if (formdata == "allOn") {
                 allOn();
                 form = "All lights are on";
             } else if (formdata == "allOff") {
@@ -39,6 +43,11 @@ function handler(req, res) {
                 form = "All lights are off";
             } else {
                 form = "Input recieved: " + formdata;
+                var val = formdata.split("&");
+                for (var i = 0; i < val.length; i++) {
+                    values.switches[val[i]] = true;
+                }
+                fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
             }
 
             //respond
@@ -66,6 +75,19 @@ function allOff() {
 
 function getJson() {
     return json = JSON.parse(fs.readFileSync(__dirname + '/values.json', 'utf8'));
+}
+
+function getValues() {
+    var on = "values";
+
+    for (var i = 0; i < values.switchNames.length; i++) {
+        var name = values.switchNames[i];
+        if (values.switches[name] == true) {
+            on += "&" + values.switchNames[i];
+        }
+    }
+
+    return on;
 }
 
 

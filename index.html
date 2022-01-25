@@ -11,7 +11,9 @@
     function ajax() {
       var formdata = '';
 
-      if (document.forms["selection"]["allOnTick"].checked == true) {
+      if (document.forms["selection"]["getValues"].checked) {
+        formdata = "getValues";
+      } else if (document.forms["selection"]["allOnTick"].checked == true) {
         formdata = "allOn";
       } else {
         for (var i = 0; i < document.forms["selection"].length; i++) {
@@ -31,6 +33,13 @@
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
           document.getElementById("output").innerHTML = xmlhttp.responseText;
+          var response = xmlhttp.responseText.split("&");
+          if (response[0] == "values") {
+            console.log("Setting values...\nLength: " + response.length);
+            for (var i = 1; i < response.length; i++) {
+              document.forms["selection"][response[i]].checked = true;
+            }
+          }
         };
       };
       xmlhttp.open("POST", "", true);
@@ -108,42 +117,46 @@
   <form name="selection" action="" onsubmit="return ajax();" method="post">
 
     <table>
-        <thead>
-            <td>Area</td>
-            <td>Value</td>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Turn on All Lights</td>
-                <td><label class="switch">
-                    <input type="checkbox" name="allOnTick" id="allOn">
-                    <span class="slider"></span>
-                  </label>
-                </td>
-            </tr>
-            <tr>
-                <td>Path Lights</td>
-                <td>
-                    <label class="switch">
-                    <input type="checkbox" name="pathTick" id="path">
-                    <span class="slider"></span>
-                  </label>
-              </td>
-            </tr>
-            <tr>
-                <td>
-                    Firepit Lights
-                </td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" name="firepitTick">
-                        <span class="slider"></span>
-                      </label>
-                </td>
-            </tr>
-        </tbody>
-    </table>  
+      <thead>
+        <td>Area</td>
+        <td>Value</td>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Turn on All Lights</td>
+          <td><label class="switch">
+              <input type="checkbox" name="allOnTick" id="allOn">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>Path Lights</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" name="path" id="path">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Firepit Lights
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" name="firepit">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
+    <label class="switch">
+      <input type="checkbox" name="getValues" id="getValues">
+      <span class="slider"></span>
+    </label>
     <input type="submit" value="submit">
   </form>
 </body>

@@ -34,7 +34,7 @@
         }
       }
 
-      console.log(formdata);
+      console.log("Formdata: " + formdata);
       xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -54,7 +54,7 @@
     }
 
     $(window).bind("load", function() { retrieveData(); });
-    
+
   </script>
   <style>
     /* The switch - the box around the slider */

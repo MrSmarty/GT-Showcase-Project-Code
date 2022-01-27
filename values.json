@@ -7,8 +7,8 @@
     ],
     "switches": {
         "allOn": false,
-        "firepit": true,
-        "path": false,
+        "firepit": false,
+        "path": true,
         "pondOne": true
     }
 }

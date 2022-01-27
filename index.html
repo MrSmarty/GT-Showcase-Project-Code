@@ -21,6 +21,13 @@
       retrieveData();
     }
 
+    function allOn() {
+      document.forms["selection"]["allOn"].checked = true;
+      ajax();
+      document.forms["selection"]["allOn"].checked = false;
+      retrieveData();
+    }
+
     function ajax() {
       var formdata = '';
 
@@ -151,14 +158,6 @@
       </thead>
       <tbody>
         <tr>
-          <td>Turn on All Lights</td>
-          <td><label class="switch">
-              <input type="checkbox" name="allOn" id="allOn">
-              <span class="slider"></span>
-            </label>
-          </td>
-        </tr>
-        <tr>
           <td>Path Lights</td>
           <td>
             <label class="switch">
@@ -178,18 +177,40 @@
             </label>
           </td>
         </tr>
+        <tr>
+          <td>
+            Pond One
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" name="pondOne">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Pond Two
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" name="pondTwo">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Pond One
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" name="pondThree">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
       </tbody>
-      <tr>
-        <td>
-          Pond One
-        </td>
-        <td>
-          <label class="switch">
-            <input type="checkbox" name="pondOne">
-            <span class="slider"></span>
-          </label>
-        </td>
-      </tr>
     </table>
 
     <input type="submit" value="submit">
@@ -200,11 +221,17 @@
     </label>
 
     <label class="hidden" class="switch">
+      <input type="checkbox" name="allOn">
+      <span class="slider"></span>
+    </label>
+
+    <label class="hidden" class="switch">
       <input type="checkbox" name="allOff">
       <span class="slider"></span>
     </label>
   </form>
   <button onclick="retrieveData()">Get Data</button>
+  <button onclick="allOn()">All On</button>
   <button onclick="allOff()">All Off</button>
 </body>
 

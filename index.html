@@ -4,6 +4,9 @@
 <head>
   <title>Waterscape Manager</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -54,6 +57,7 @@
       xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
           document.getElementById("output").innerHTML = xmlhttp.responseText;
           var response = xmlhttp.responseText.split("&");
           if (response[0] == "values") {
@@ -83,6 +87,45 @@
       visibility: hidden;
     }
 
+    .buttons {
+      margin: 10px;
+      font-family: 'Outfit', Arial, Helvetica, sans-serif;
+    }
+
+    .buttons>button {
+      margin: 10px;
+      width: 100px;
+      height: 60px;
+      background-color: #0c94b6;
+      color: #DDDDDD;
+      border-radius: 8px;
+      border-style: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .buttons>button:hover {
+      background-color: #0e7892;
+    }
+
+    .submit {
+      width: 120px;
+      height: 65px;
+      background-color: #69cc69;
+      color: #DDDDDD;
+      border-radius: 8px;
+      border-style: none;
+      font-size: 30px;
+      cursor: pointer;
+      font-family: 'Outfit', Arial, Helvetica, sans-serif;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .submit:hover {
+      background-color: #61b361;
+    }
+
     /* The switch - the box around the slider */
     .switch {
       position: relative;
@@ -106,7 +149,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
+      background-color: #DD6666;
       -webkit-transition: .4s;
       transition: .4s;
     }
@@ -123,12 +166,13 @@
       transition: .4s;
     }
 
+
     input:checked+.slider {
-      background-color: #2196F3;
+      background-color: #69cc69;
     }
 
     input:focus+.slider {
-      box-shadow: 0 0 1px #2196F3;
+      box-shadow: 0 0 1px #69cc69;
     }
 
     input:checked+.slider:before {
@@ -144,6 +188,32 @@
 
     .slider.round:before {
       border-radius: 50%;
+    }
+
+    form {
+      font-size: 20px;
+      width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table {
+      row-gap: 30px;
+    }
+
+    th,
+    td {
+      padding: 5px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    body {
+      background-color: #444444;
+      color: #DDDDDD;
+      font-family: 'Outfit', Arial, Helvetica, sans-serif;
     }
   </style>
 
@@ -213,7 +283,7 @@
       </tbody>
     </table>
 
-    <input type="submit" value="submit">
+    <input type="submit" value="Submit" class="submit">
 
     <label class="hidden" class="switch">
       <input type="checkbox" name="getValues">
@@ -230,9 +300,11 @@
       <span class="slider"></span>
     </label>
   </form>
-  <button onclick="retrieveData()">Get Data</button>
-  <button onclick="allOn()">All On</button>
-  <button onclick="allOff()">All Off</button>
+  <div class="buttons">
+    <button onclick="retrieveData()">Get Data</button> <br>
+    <button onclick="allOn()">All On</button> <br>
+    <button onclick="allOff()">All Off</button>
+  </div>
 </body>
 
 </html>

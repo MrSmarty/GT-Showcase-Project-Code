@@ -11,6 +11,7 @@
         "path": false,
         "pondOne": true,
         "pondTwo": false,
-        "pondThree": true
-    }
+        "pondThree": false
+    },
+    "debug": false
 }

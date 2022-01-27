@@ -52,7 +52,11 @@ function handler(req, res) {
                 }
                 fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
             } else {
-                form = "Input recieved: " + formdata;
+                if (values.debug == true) {
+                    form = "Input recieved: " + formdata;
+                } else {
+                    form = "Completed";
+                }
                 var val = formdata.split("&");
 
                 // console.log(values.switches[values.switchNames[0]]);

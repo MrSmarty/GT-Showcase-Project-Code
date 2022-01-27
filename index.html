@@ -3,17 +3,16 @@
 
 <head>
   <title>Waterscape Manager</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
   <script>
     function retrieveData() {
-      document.forms["selection"]["getvalues"].checked = true;
+      document.forms["selection"]["getValues"].checked = true;
       ajax();
-      document.forms["selection"]["getvalues"].checked = false;
+      document.forms["selection"]["getValues"].checked = false;
     }
-
-    retrieveData();
 
     function ajax() {
       var formdata = '';
@@ -53,6 +52,9 @@
       xmlhttp.send(formdata);
       return false;
     }
+
+    $(window).bind("load", function() { retrieveData(); });
+    
   </script>
   <style>
     /* The switch - the box around the slider */
@@ -177,6 +179,7 @@
     </label>
     <input type="submit" value="submit">
   </form>
+  <button onclick="retrieveData()">Test</button>
 </body>
 
 </html>

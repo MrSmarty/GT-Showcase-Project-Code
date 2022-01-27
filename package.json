@@ -2,6 +2,7 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
+    "jquery": "^3.6.0",
     "open": "^8.4.0",
     "si": "^2.0.0",
     "systeminformation": "^5.10.7"

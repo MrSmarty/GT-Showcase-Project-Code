@@ -14,6 +14,10 @@
       document.forms["selection"]["getValues"].checked = false;
     }
 
+    function allOff() {
+
+    }
+
     function ajax() {
       var formdata = '';
 
@@ -53,10 +57,14 @@
       return false;
     }
 
-    $(window).bind("load", function() { retrieveData(); });
+    $(window).bind("load", function () { retrieveData(); });
 
   </script>
   <style>
+    #hidden {
+      visibility: hidden;
+    }
+
     /* The switch - the box around the slider */
     .switch {
       position: relative;
@@ -173,13 +181,14 @@
       </tr>
     </table>
 
-    <label class="switch">
-      <input type="checkbox" name="getValues" id="getValues">
+    <input type="submit" value="submit">
+
+    <label class="switch" class="hidden">
+      <input type="checkbox" name="getValues">
       <span class="slider"></span>
     </label>
-    <input type="submit" value="submit">
   </form>
-  <button onclick="retrieveData()">Test</button>
+  <button onclick="retrieveData()">Get Data</button>
 </body>
 
 </html>

@@ -7,6 +7,13 @@
 
 <body>
   <script>
+    function retrieveData() {
+      document.forms["selection"]["getvalues"].checked = true;
+      ajax();
+      document.forms["selection"]["getvalues"].checked = false;
+    }
+
+    retrieveData();
 
     function ajax() {
       var formdata = '';

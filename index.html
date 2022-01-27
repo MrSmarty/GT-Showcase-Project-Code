@@ -15,7 +15,10 @@
     }
 
     function allOff() {
-
+      document.forms["selection"]["allOff"].checked = true;
+      ajax();
+      document.forms["selection"]["allOff"].checked = false;
+      retrieveData();
     }
 
     function ajax() {
@@ -23,7 +26,9 @@
 
       if (document.forms["selection"]["getValues"].checked) {
         formdata = "getValues";
-      } else if (document.forms["selection"]["allOnTick"].checked == true) {
+      } else if (document.forms["selection"]["allOff"].checked == true) {
+        formdata = "allOff";
+      } else if (document.forms["selection"]["allOn"].checked == true) {
         formdata = "allOn";
       } else {
         for (var i = 0; i < document.forms["selection"].length; i++) {
@@ -46,6 +51,12 @@
           var response = xmlhttp.responseText.split("&");
           if (response[0] == "values") {
             console.log("Setting values...\nLength: " + response.length);
+
+            var elements = document.getElementsByTagName("input")
+            for (var i = 0; i < elements.length; i++) {
+              elements[i].checked = false;
+            }
+
             for (var i = 1; i < response.length; i++) {
               document.forms["selection"][response[i]].checked = true;
             }
@@ -61,7 +72,7 @@
 
   </script>
   <style>
-    #hidden {
+    .hidden {
       visibility: hidden;
     }
 
@@ -142,7 +153,7 @@
         <tr>
           <td>Turn on All Lights</td>
           <td><label class="switch">
-              <input type="checkbox" name="allOnTick" id="allOn">
+              <input type="checkbox" name="allOn" id="allOn">
               <span class="slider"></span>
             </label>
           </td>
@@ -183,12 +194,18 @@
 
     <input type="submit" value="submit">
 
-    <label class="switch" class="hidden">
+    <label class="hidden" class="switch">
       <input type="checkbox" name="getValues">
+      <span class="slider"></span>
+    </label>
+
+    <label class="hidden" class="switch">
+      <input type="checkbox" name="allOff">
       <span class="slider"></span>
     </label>
   </form>
   <button onclick="retrieveData()">Get Data</button>
+  <button onclick="allOff()">All Off</button>
 </body>
 
 </html>

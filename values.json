@@ -8,10 +8,10 @@
     ],
     "switches": {
         "firepit": true,
-        "path": false,
+        "path": true,
         "pondOne": true,
-        "pondTwo": false,
-        "pondThree": false
+        "pondTwo": true,
+        "pondThree": true
     },
     "debug": false
 }

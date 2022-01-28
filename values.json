@@ -7,11 +7,18 @@
         "pondThree"
     ],
     "switches": {
+        "path": true,
         "firepit": true,
-        "path": false,
         "pondOne": true,
-        "pondTwo": false,
+        "pondTwo": true,
         "pondThree": false
+    },
+    "switchColors": {
+        "path": "#4c39db",
+        "firepit": "#69ce6b",
+        "pondOne": "#000000",
+        "pondTwo": "#661d81",
+        "pondThree": "#000000"
     },
     "debug": false
 }

@@ -57,16 +57,16 @@ function handler(req, res) {
                 } else {
                     form = "Completed";
                 }
+
                 var val = formdata.split("&");
 
-                // console.log(values.switches[values.switchNames[0]]);
-
                 for (var i = 0; i < values.switchNames.length; i++) {
-                    if (val.includes(values.switchNames[i])) {
-                        values.switches[values.switchNames[i]] = true;
-                    } else {
-                        values.switches[values.switchNames[i]] = false;
-                    }
+                    values.switches[values.switchNames[i]] = false;
+                }
+
+                for (var i = 0; i < val.length; i += 2) {
+                    values.switches[val[i]] = true;
+                    values.switchColors[val[i]] = val[i + 1];
                 }
                 fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
             }
@@ -104,7 +104,7 @@ function getValues() {
     for (var i = 0; i < values.switchNames.length; i++) {
         var name = values.switchNames[i];
         if (values.switches[name] == true) {
-            on += "&" + values.switchNames[i];
+            on += "&" + values.switchNames[i] + "&" + values.switchColors[name];
         }
     }
 

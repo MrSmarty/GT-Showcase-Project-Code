@@ -43,7 +43,10 @@
       } else {
         for (var i = 0; i < document.forms["selection"].length; i++) {
           if (document.forms["selection"][i].checked == true) {
+            // Send name
             formdata += document.forms["selection"][i].name + "&";
+            // Send color
+            formdata += document.forms["selection"][i + 1].value + "&";
           }
         }
         if (formdata == "") {
@@ -68,8 +71,9 @@
               elements[i].checked = false;
             }
 
-            for (var i = 1; i < response.length; i++) {
+            for (var i = 1; i < response.length; i += 2) {
               document.forms["selection"][response[i]].checked = true;
+              $("#" + response[i] + "Color").val(response[i + 1]);
             }
           }
         };
@@ -225,6 +229,7 @@
       <thead>
         <td>Area</td>
         <td>Value</td>
+        <td>Color</td>
       </thead>
       <tbody>
         <tr>
@@ -234,6 +239,9 @@
               <input type="checkbox" name="path" id="path">
               <span class="slider"></span>
             </label>
+          </td>
+          <td>
+            <input type="color" name="pathColor" id="pathColor" value="#000000">
           </td>
         </tr>
         <tr>
@@ -246,6 +254,9 @@
               <span class="slider"></span>
             </label>
           </td>
+          <td>
+            <input type="color" name="firepitColor" id="firepitColor">
+          </td>
         </tr>
         <tr>
           <td>
@@ -256,6 +267,9 @@
               <input type="checkbox" name="pondOne">
               <span class="slider"></span>
             </label>
+          </td>
+          <td>
+            <input type="color" name="poneOneColor" id="pondOneColor">
           </td>
         </tr>
         <tr>
@@ -268,16 +282,22 @@
               <span class="slider"></span>
             </label>
           </td>
+          <td>
+            <input type="color" name="pondTwoColor" id="pondTwoColor">
+          </td>
         </tr>
         <tr>
           <td>
-            Pond One
+            Pond Three
           </td>
           <td>
             <label class="switch">
               <input type="checkbox" name="pondThree">
               <span class="slider"></span>
             </label>
+          </td>
+          <td>
+            <input type="color" name="pondThreeColor" id="pondThreeColor">
           </td>
         </tr>
       </tbody>

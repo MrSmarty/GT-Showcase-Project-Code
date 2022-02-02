@@ -1,330 +1,335 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Waterscape Manager</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <title>Waterscape Manager</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <script>
-    function retrieveData() {
-      document.forms["selection"]["getValues"].checked = true;
-      ajax();
-      document.forms["selection"]["getValues"].checked = false;
-    }
-
-    function allOff() {
-      document.forms["selection"]["allOff"].checked = true;
-      ajax();
-      document.forms["selection"]["allOff"].checked = false;
-      retrieveData();
-    }
-
-    function allOn() {
-      document.forms["selection"]["allOn"].checked = true;
-      ajax();
-      document.forms["selection"]["allOn"].checked = false;
-      retrieveData();
-    }
-
-    function ajax() {
-      var formdata = '';
-
-      if (document.forms["selection"]["getValues"].checked) {
-        formdata = "getValues";
-      } else if (document.forms["selection"]["allOff"].checked == true) {
-        formdata = "allOff";
-      } else if (document.forms["selection"]["allOn"].checked == true) {
-        formdata = "allOn";
-      } else {
-        for (var i = 0; i < document.forms["selection"].length; i++) {
-          if (document.forms["selection"][i].checked == true) {
-            // Send name
-            formdata += document.forms["selection"][i].name + "&";
-            // Send color
-            formdata += document.forms["selection"][i + 1].value + "&";
-          }
-        }
-        if (formdata == "") {
-          formdata = "allOff";
-        } else {
-          formdata = formdata.substring(0, formdata.length - 1);
-        }
+  <body>
+    <script>
+      function retrieveData() {
+        document.forms["selection"]["getValues"].checked = true;
+        ajax();
+        document.forms["selection"]["getValues"].checked = false;
       }
 
-      console.log("Formdata: " + formdata);
-      xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      function allOff() {
+        document.forms["selection"]["allOff"].checked = true;
+        ajax();
+        document.forms["selection"]["allOff"].checked = false;
+        retrieveData();
+      }
 
-          document.getElementById("output").innerHTML = xmlhttp.responseText;
-          var response = xmlhttp.responseText.split("&");
-          if (response[0] == "values") {
-            console.log("Setting values...\nLength: " + response.length);
+      function allOn() {
+        document.forms["selection"]["allOn"].checked = true;
+        ajax();
+        document.forms["selection"]["allOn"].checked = false;
+        retrieveData();
+      }
 
-            var elements = document.getElementsByTagName("input")
-            for (var i = 0; i < elements.length; i++) {
-              elements[i].checked = false;
+      function ajax() {
+        var formdata = "";
+
+        if (document.forms["selection"]["getValues"].checked) {
+          formdata = "getValues";
+        } else if (document.forms["selection"]["allOff"].checked == true) {
+          formdata = "allOff";
+        } else if (document.forms["selection"]["allOn"].checked == true) {
+          formdata = "allOn";
+        } else {
+          for (var i = 0; i < document.forms["selection"].length; i++) {
+            if (document.forms["selection"][i].checked == true) {
+              // Send name
+              formdata += document.forms["selection"][i].name + "&";
+              // Send color
+              formdata += document.forms["selection"][i + 1].value + "&";
             }
+          }
+          if (formdata == "") {
+            formdata = "allOff";
+          } else {
+            formdata = formdata.substring(0, formdata.length - 1);
+          }
+        }
 
-            for (var i = 1; i < response.length; i += 2) {
-              document.forms["selection"][response[i]].checked = true;
-              $("#" + response[i] + "Color").val(response[i + 1]);
+        console.log("Formdata: " + formdata);
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("output").innerHTML = xmlhttp.responseText;
+            var response = xmlhttp.responseText.split("&");
+            if (response[0] == "values") {
+              console.log("Setting values...\nLength: " + response.length);
+
+              var elements = document.getElementsByTagName("input");
+              for (var i = 0; i < elements.length; i++) {
+                elements[i].checked = false;
+              }
+
+              for (var i = 1; i < response.length; i += 2) {
+                document.forms["selection"][response[i]].checked = true;
+                $("#" + response[i] + "Color").val(response[i + 1]);
+              }
             }
           }
         };
-      };
-      xmlhttp.open("POST", "", true);
-      xmlhttp.send(formdata);
-      return false;
-    }
+        xmlhttp.open("POST", "", true);
+        xmlhttp.send(formdata);
+        return false;
+      }
 
-    $(window).bind("load", function () { retrieveData(); });
+      $(window).bind("load", function () {
+        retrieveData();
+      });
+    </script>
+    <style>
+      .hidden {
+        visibility: hidden;
+      }
 
-  </script>
-  <style>
-    .hidden {
-      visibility: hidden;
-    }
+      .buttons {
+        margin: 10px;
+        font-family: "Outfit", Arial, Helvetica, sans-serif;
+      }
 
-    .buttons {
-      margin: 10px;
-      font-family: 'Outfit', Arial, Helvetica, sans-serif;
-    }
+      .buttons > button {
+        margin: 10px;
+        width: 100px;
+        height: 60px;
+        background-color: #0c94b6;
+        color: #dddddd;
+        border-radius: 8px;
+        border-style: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
 
-    .buttons>button {
-      margin: 10px;
-      width: 100px;
-      height: 60px;
-      background-color: #0c94b6;
-      color: #DDDDDD;
-      border-radius: 8px;
-      border-style: none;
-      font-size: 20px;
-      cursor: pointer;
-    }
+      .buttons > button:hover {
+        background-color: #0e7892;
+      }
 
-    .buttons>button:hover {
-      background-color: #0e7892;
-    }
+      .submit {
+        width: 120px;
+        height: 65px;
+        background-color: #69cc69;
+        color: #dddddd;
+        border-radius: 8px;
+        border-style: none;
+        font-size: 30px;
+        cursor: pointer;
+        font-family: "Outfit", Arial, Helvetica, sans-serif;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-    .submit {
-      width: 120px;
-      height: 65px;
-      background-color: #69cc69;
-      color: #DDDDDD;
-      border-radius: 8px;
-      border-style: none;
-      font-size: 30px;
-      cursor: pointer;
-      font-family: 'Outfit', Arial, Helvetica, sans-serif;
-      margin-left: auto;
-      margin-right: auto;
-    }
+      .submit:hover {
+        background-color: #61b361;
+      }
 
-    .submit:hover {
-      background-color: #61b361;
-    }
+      /* The switch - the box around the slider */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
 
-    /* The switch - the box around the slider */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
+      /* Hide default HTML checkbox */
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-    /* Hide default HTML checkbox */
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #dd6666;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
 
-    /* The slider */
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #DD6666;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
 
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
+      input:checked + .slider {
+        background-color: #69cc69;
+      }
 
+      input:focus + .slider {
+        box-shadow: 0 0 1px #69cc69;
+      }
 
-    input:checked+.slider {
-      background-color: #69cc69;
-    }
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
 
-    input:focus+.slider {
-      box-shadow: 0 0 1px #69cc69;
-    }
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
 
-    input:checked+.slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
-    }
+      .slider.round:before {
+        border-radius: 50%;
+      }
 
-    /* Rounded sliders */
-    .slider.round {
-      border-radius: 34px;
-    }
+      input[type="color" i] {
+        appearance: auto;
+        width: 50px;
+        height: 30px;
+        cursor: pointer;
+        box-sizing: border-box;
+        padding: 1px 2px;
+      }
 
-    .slider.round:before {
-      border-radius: 50%;
-    }
+      form {
+        font-size: 20px;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
-    form {
-      font-size: 20px;
-      width: 200px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+      table {
+        row-gap: 30px;
+      }
 
-    table {
-      row-gap: 30px;
-    }
+      th,
+      td {
+        padding: 5px;
+      }
 
-    th,
-    td {
-      padding: 5px;
-    }
+      h1 {
+        text-align: center;
+      }
 
-    h1 {
-      text-align: center;
-    }
+      body {
+        background-color: #444444;
+        color: #dddddd;
+        font-family: "Outfit", Arial, Helvetica, sans-serif;
+      }
+    </style>
 
-    body {
-      background-color: #444444;
-      color: #DDDDDD;
-      font-family: 'Outfit', Arial, Helvetica, sans-serif;
-    }
-  </style>
+    <h1>Smith Family Waterscape Manager</h1>
+    <p id="output"></p>
+    <form name="selection" action="" onsubmit="return ajax();" method="post">
+      <table>
+        <thead>
+          <td>Area</td>
+          <td>Value</td>
+          <td>Color</td>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Path Lights</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="path" id="path" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <input
+                type="color"
+                name="pathColor"
+                id="pathColor"
+                value="#000000"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Firepit Lights</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="firepit" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <input type="color" name="firepitColor" id="firepitColor" />
+            </td>
+          </tr>
+          <tr>
+            <td>Pond One</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="pondOne" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <input type="color" name="poneOneColor" id="pondOneColor" />
+            </td>
+          </tr>
+          <tr>
+            <td>Pond Two</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="pondTwo" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <input type="color" name="pondTwoColor" id="pondTwoColor" />
+            </td>
+          </tr>
+          <tr>
+            <td>Pond Three</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="pondThree" />
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td>
+              <input type="color" name="pondThreeColor" id="pondThreeColor" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  <h1>Smith Family Waterscape Manager</h1>
-  <p id="output"></p>
-  <form name="selection" action="" onsubmit="return ajax();" method="post">
+      <input type="submit" value="Submit" class="submit" />
 
-    <table>
-      <thead>
-        <td>Area</td>
-        <td>Value</td>
-        <td>Color</td>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Path Lights</td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" name="path" id="path">
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <input type="color" name="pathColor" id="pathColor" value="#000000">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Firepit Lights
-          </td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" name="firepit">
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <input type="color" name="firepitColor" id="firepitColor">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Pond One
-          </td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" name="pondOne">
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <input type="color" name="poneOneColor" id="pondOneColor">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Pond Two
-          </td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" name="pondTwo">
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <input type="color" name="pondTwoColor" id="pondTwoColor">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Pond Three
-          </td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" name="pondThree">
-              <span class="slider"></span>
-            </label>
-          </td>
-          <td>
-            <input type="color" name="pondThreeColor" id="pondThreeColor">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <label class="hidden" class="switch">
+        <input type="checkbox" name="getValues" />
+        <span class="slider"></span>
+      </label>
 
-    <input type="submit" value="Submit" class="submit">
+      <label class="hidden" class="switch">
+        <input type="checkbox" name="allOn" />
+        <span class="slider"></span>
+      </label>
 
-    <label class="hidden" class="switch">
-      <input type="checkbox" name="getValues">
-      <span class="slider"></span>
-    </label>
-
-    <label class="hidden" class="switch">
-      <input type="checkbox" name="allOn">
-      <span class="slider"></span>
-    </label>
-
-    <label class="hidden" class="switch">
-      <input type="checkbox" name="allOff">
-      <span class="slider"></span>
-    </label>
-  </form>
-  <div class="buttons">
-    <button onclick="retrieveData()">Get Data</button> <br>
-    <button onclick="allOn()">All On</button> <br>
-    <button onclick="allOff()">All Off</button>
-  </div>
-</body>
-
+      <label class="hidden" class="switch">
+        <input type="checkbox" name="allOff" />
+        <span class="slider"></span>
+      </label>
+    </form>
+    <div class="buttons">
+      <button onclick="retrieveData()">Get Data</button> <br />
+      <button onclick="allOn()">All On</button> <br />
+      <button onclick="allOff()">All Off</button>
+    </div>
+  </body>
 </html>

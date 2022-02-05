@@ -65,10 +65,18 @@ function handler(req, res) {
         for (var i = 0; i < values.switchNames.length; i++) {
           values.switches[values.switchNames[i]] = false;
         }
+        for (var i = 0; i < values.waterfallNames.length; i++) {
+          values.waterfalls[values.waterfallNames[i]] = false;
+        }
 
         for (var i = 0; i < val.length; i += 2) {
-          values.switches[val[i]] = true;
-          values.switchColors[val[i]] = val[i + 1];
+          if (val[i].substring(0, 5) != "water") {
+            values.switches[val[i]] = true;
+            values.switchColors[val[i]] = val[i + 1];
+          } else {
+            values.waterfalls[val[i]] = true;
+            i--;
+          }
         }
         fs.writeFileSync(
           __dirname + "/values.json",
@@ -108,6 +116,12 @@ function getValues() {
     var name = values.switchNames[i];
     if (values.switches[name] == true) {
       on += "&" + values.switchNames[i] + "&" + values.switchColors[name];
+    }
+  }
+  for (var i = 0; i < values.waterfallNames.length; i++) {
+    var name = values.waterfallNames[i];
+    if (values.waterfalls[name] == true) {
+      on += "&" + values.waterfallNames[i];
     }
   }
 

@@ -45,10 +45,17 @@
         } else {
           for (var i = 0; i < document.forms["selection"].length; i++) {
             if (document.forms["selection"][i].checked == true) {
-              // Send name
-              formdata += document.forms["selection"][i].name + "&";
-              // Send color
-              formdata += document.forms["selection"][i + 1].value + "&";
+              // If not a waterfall:
+              if (
+                document.forms["selection"][i].name.substring(0, 5) != "water"
+              ) {
+                // Send name
+                formdata += document.forms["selection"][i].name + "&";
+                // Send color
+                formdata += document.forms["selection"][i + 1].value + "&";
+              } else {
+                formdata += document.forms["selection"][i].name + "&";
+              }
             }
           }
           if (formdata == "") {
@@ -73,8 +80,13 @@
               }
 
               for (var i = 1; i < response.length; i += 2) {
-                document.forms["selection"][response[i]].checked = true;
-                $("#" + response[i] + "Color").val(response[i + 1]);
+                if (response[i].substring(0, 5) != "water") {
+                  document.forms["selection"][response[i]].checked = true;
+                  $("#" + response[i] + "Color").val(response[i + 1]);
+                } else {
+                  document.forms["selection"][response[i]].checked = true;
+                  i--;
+                }
               }
             }
           }
@@ -239,6 +251,8 @@
           <td>Area</td>
           <td>Value</td>
           <td>Color</td>
+          <td>Waterfall</td>
+          <td>Waterfall Value</td>
         </thead>
         <tbody>
           <tr>
@@ -257,6 +271,13 @@
                 value="#000000"
               />
             </td>
+            <td>Waterfall One</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="waterfallOne" id="waterfallOne" />
+                <span class="slider"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td>Firepit Lights</td>
@@ -269,6 +290,13 @@
             <td>
               <input type="color" name="firepitColor" id="firepitColor" />
             </td>
+            <td>Waterfall Two</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" name="waterfallTwo" id="waterfallTwo" />
+                <span class="slider"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td>Pond One</td>
@@ -279,7 +307,18 @@
               </label>
             </td>
             <td>
-              <input type="color" name="poneOneColor" id="pondOneColor" />
+              <input type="color" name="pondOneColor" id="pondOneColor" />
+            </td>
+            <td>Waterfall Three</td>
+            <td>
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  name="waterfallThree"
+                  id="waterfallThree"
+                />
+                <span class="slider"></span>
+              </label>
             </td>
           </tr>
           <tr>

@@ -1,24 +1,34 @@
 {
-  "switchNames": ["firepit", "path", "pondOne", "pondTwo", "pondThree"],
-  "switches": {
-    "path": true,
-    "firepit": true,
-    "pondOne": false,
-    "pondTwo": true,
-    "pondThree": false
-  },
-  "switchColors": {
-    "path": "#000000",
-    "firepit": "#69ce6b",
-    "pondOne": "#3b87ce",
-    "pondTwo": "#661d81",
-    "pondThree": "#3028a4"
-  },
-  "waterfallNames": ["waterfallOne", "waterfallTwo", "waterfallThree"],
-  "waterfalls": {
-    "waterfallOne": false,
-    "waterfallTwo": false,
-    "waterfallThree": false
-  },
-  "debug": false
+    "switchNames": [
+        "firepit",
+        "path",
+        "pondOne",
+        "pondTwo",
+        "pondThree"
+    ],
+    "switches": {
+        "path": true,
+        "firepit": true,
+        "pondOne": false,
+        "pondTwo": true,
+        "pondThree": false
+    },
+    "switchColors": {
+        "path": "#d41c1c",
+        "firepit": "#5972c0",
+        "pondOne": "#000000",
+        "pondTwo": "#dd2727",
+        "pondThree": "#3028a4"
+    },
+    "waterfallNames": [
+        "waterfallOne",
+        "waterfallTwo",
+        "waterfallThree"
+    ],
+    "waterfalls": {
+        "waterfallOne": true,
+        "waterfallTwo": false,
+        "waterfallThree": true
+    },
+    "debug": false
 }

@@ -1,4 +1,6 @@
 // PC: 192.168.1.156
+// Pi: 192.168.1.156:8006
+// Pi External: 107.217.165.178:8006
 var http = require("http");
 var fs = require("fs");
 const open = require("open");
@@ -12,7 +14,7 @@ let values = getJson();
 // console.log(getValues());
 
 // Create a function to handle every HTTP request
-function handler(req, res) {
+function handler(req, res) { 
   var form = "";
 
   if (req.method == "GET") {
@@ -132,7 +134,7 @@ function getValues() {
 
 // Create a server that invokes the `handler` function upon receiving a request
 
-http.createServer(handler).listen(8000, "0.0.0.0", function (err) {
+http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
   } else {

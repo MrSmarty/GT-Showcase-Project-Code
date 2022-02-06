@@ -9,15 +9,15 @@
     "switches": {
         "path": true,
         "firepit": true,
-        "pondOne": false,
+        "pondOne": true,
         "pondTwo": true,
         "pondThree": false
     },
     "switchColors": {
         "path": "#d41c1c",
         "firepit": "#5972c0",
-        "pondOne": "#000000",
-        "pondTwo": "#dd2727",
+        "pondOne": "#2447f5",
+        "pondTwo": "#000000",
         "pondThree": "#3028a4"
     },
     "waterfallNames": [

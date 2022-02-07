@@ -7,9 +7,9 @@
         "pondThree"
     ],
     "switches": {
-        "path": true,
+        "path": false,
         "firepit": true,
-        "pondOne": true,
+        "pondOne": false,
         "pondTwo": true,
         "pondThree": false
     },
@@ -27,8 +27,8 @@
     ],
     "waterfalls": {
         "waterfallOne": true,
-        "waterfallTwo": false,
-        "waterfallThree": true
+        "waterfallTwo": true,
+        "waterfallThree": false
     },
     "debug": false
 }

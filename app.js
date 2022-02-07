@@ -3,6 +3,7 @@
 // Pi External: 107.217.165.178:8006
 var http = require("http");
 var fs = require("fs");
+var gpio = require('onoff');
 const open = require("open");
 const si = require("systeminformation");
 

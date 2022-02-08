@@ -1,21 +1,25 @@
 // PC: 192.168.1.156
 // Pi: 192.168.1.156:8006
 // Pi External: 107.217.165.178:8006
+
 var http = require("http");
 var fs = require("fs");
-var Gpio = require('onoff').Gpio;
-const open = require("open");
-const si = require("systeminformation");
 
 let values = getJson();
 
+
+if (values.hardware) { var Gpio = require('onoff').Gpio; }
+const open = require("open");
+const si = require("systeminformation");
+
+
 // Get GPIO Pins
-var pins = [new Gpio(4, 'out'), new Gpio(17, 'out'), new Gpio(27, 'out'), new Gpio(22, 'out'), new Gpio(23, 'out')];
+if (values.hardware) { var pins = [new Gpio(4, 'out'), new Gpio(17, 'out'), new Gpio(27, 'out'), new Gpio(22, 'out'), new Gpio(23, 'out')]; }
 update();
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
-  
+
   var form = "";
 
   if (req.method == "GET") {
@@ -117,9 +121,9 @@ function allOff() {
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
     if (values.waterfalls[values.waterfallNames[i]] == true) {
-      pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(1);
+      if (values.hardware) { pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(1); }
     } else {
-      pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(0);
+      if (values.hardware) { pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(0); }
     }
   }
 }
@@ -151,29 +155,31 @@ function getValues() {
   return on;
 }
 
-
-function switchPin(pin, state) {
-
-}
-
 // Create a server that invokes the `handler` function upon receiving a request
-
-http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
+var port;
+if (values.hardware) {
+  port = 8006;
+} else {
+  port = 8000;
+}
+http.createServer(handler).listen(port, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
-    pins[0].writeSync(0);
+    if (values.hardware) { pins[0].writeSync(0); }
   } else {
     console.log(
-      "Server running at http://127.0.0.1:8000/ or http://localhost:8000/"
+      "Server running at http://127.0.0.1:%d/ or http://localhost:%d/", port, port
     );
-    pins[0].writeSync(1);
+    if (values.hardware) { pins[0].writeSync(1); }
   }
 });
 
 function clean() {
 
-  for (var i = 0; i < pins.length; i++) {
-    pins[i].writeSync(0);
+  if (values.hardware) {
+    for (var i = 0; i < pins.length; i++) {
+      pins[i].writeSync(0);
+    }
   }
 
 }

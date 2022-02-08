@@ -40,5 +40,6 @@
         "waterfallTwo": 2,
         "waterfallThree": 3
     },
+    "hardware": false,
     "debug": false
 }

@@ -3,14 +3,15 @@
 // Pi External: 107.217.165.178:8006
 var http = require("http");
 var fs = require("fs");
-//var Gpio = require('onoff').Gpio;
+var Gpio = require('onoff').Gpio;
 const open = require("open");
 const si = require("systeminformation");
 
 let values = getJson();
 
 // Get GPIO Pins
-//var pins = [new Gpio(4, 'out'), new Gpio(5, 'out')];
+var pins = [new Gpio(4, 'out'), new Gpio(17, 'out'), new Gpio(27, 'out'), new Gpio(22, 'out'), new Gpio(23, 'out')];
+update();
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
@@ -39,6 +40,10 @@ function handler(req, res) {
         for (var i = 0; i < values.switchNames.length; i++) {
           values.switches[values.switchNames[i]] = true;
         }
+        for (var i = 0; i < values.waterfallNames.length; i++) {
+          values.waterfalls[values.waterfallNames[i]] = true;
+        }
+
         fs.writeFileSync(
           __dirname + "/values.json",
           JSON.stringify(values, null, 4)
@@ -49,6 +54,9 @@ function handler(req, res) {
 
         for (var i = 0; i < values.switchNames.length; i++) {
           values.switches[values.switchNames[i]] = false;
+        }
+        for (var i = 0; i < values.waterfallNames.length; i++) {
+          values.waterfalls[values.waterfallNames[i]] = false;
         }
         fs.writeFileSync(
           __dirname + "/values.json",
@@ -84,6 +92,7 @@ function handler(req, res) {
           JSON.stringify(values, null, 4)
         );
       }
+      update();
 
       //respond
       res.setHeader("Content-Type", "text/html");
@@ -102,6 +111,16 @@ function allOn() {
 
 function allOff() {
   console.log("All lights are off");
+}
+
+function update() {
+  for (var i = 0; i < values.waterfallNames.length; i++) {
+    if (values.waterfalls[values.waterfallNames[i]] == true) {
+      pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(1);
+    } else {
+      pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(0);
+    }
+  }
 }
 
 function getJson() {
@@ -138,18 +157,19 @@ function switchPin(pin, state) {
 
 // Create a server that invokes the `handler` function upon receiving a request
 
-http.createServer(handler).listen(8000, "0.0.0.0", function (err) {
+http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
   } else {
     console.log(
       "Server running at http://127.0.0.1:8000/ or http://localhost:8000/"
     );
-    // pins[0].writeSync(1);
+    pins[0].writeSync(1);
   }
 });
 
 function clean() {
+  pins[0].writeSync(0);
   /*
   for (var i = 0; i < pins.length; i++) {
     

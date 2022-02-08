@@ -15,6 +15,7 @@ update();
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
+  
   var form = "";
 
   if (req.method == "GET") {
@@ -160,6 +161,7 @@ function switchPin(pin, state) {
 http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
+    pins[0].writeSync(0);
   } else {
     console.log(
       "Server running at http://127.0.0.1:8000/ or http://localhost:8000/"
@@ -169,12 +171,11 @@ http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
 });
 
 function clean() {
-  pins[0].writeSync(0);
-  /*
+
   for (var i = 0; i < pins.length; i++) {
-    
+    pins[i].writeSync(0);
   }
-  */
+
 }
 
 // Handle application Quit

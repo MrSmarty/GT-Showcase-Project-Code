@@ -10,7 +10,7 @@
         "path": true,
         "firepit": true,
         "pondOne": true,
-        "pondTwo": false,
+        "pondTwo": true,
         "pondThree": false
     },
     "switchColors": {
@@ -27,8 +27,8 @@
     ],
     "waterfalls": {
         "waterfallOne": false,
-        "waterfallTwo": false,
-        "waterfallThree": false
+        "waterfallTwo": true,
+        "waterfallThree": true
     },
     "waterfallHeaders": {
         "waterfallOne": 17,

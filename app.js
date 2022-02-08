@@ -3,19 +3,17 @@
 // Pi External: 107.217.165.178:8006
 var http = require("http");
 var fs = require("fs");
-var gpio = require('onoff');
+//var Gpio = require('onoff').Gpio;
 const open = require("open");
 const si = require("systeminformation");
 
 let values = getJson();
-// console.log(values.switches.firePit);
-// values.switches.firePit = true;
-// fs.writeFileSync(__dirname + '/values.json', JSON.stringify(values, null, 4));
 
-// console.log(getValues());
+// Get GPIO Pins
+//var pins = [new Gpio(4, 'out'), new Gpio(5, 'out')];
 
 // Create a function to handle every HTTP request
-function handler(req, res) { 
+function handler(req, res) {
   var form = "";
 
   if (req.method == "GET") {
@@ -133,14 +131,51 @@ function getValues() {
   return on;
 }
 
+
+function switchPin(pin, state) {
+
+}
+
 // Create a server that invokes the `handler` function upon receiving a request
 
-http.createServer(handler).listen(8006, "0.0.0.0", function (err) {
+http.createServer(handler).listen(8000, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
   } else {
     console.log(
       "Server running at http://127.0.0.1:8000/ or http://localhost:8000/"
     );
+    // pins[0].writeSync(1);
   }
 });
+
+function clean() {
+  /*
+  for (var i = 0; i < pins.length; i++) {
+    
+  }
+  */
+}
+
+// Handle application Quit
+process.stdin.resume();//so the program will not close instantly
+
+function exitHandler(options, exitCode) {
+  if (options.cleanup) clean();
+  if (exitCode || exitCode === 0) console.log(exitCode);
+  if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on('exit', exitHandler.bind(null, { cleanup: true }));
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, { exit: true }));
+
+// catches "kill pid" (for example: nodemon restart)
+process.on('SIGUSR1', exitHandler.bind(null, { exit: true }));
+process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
+

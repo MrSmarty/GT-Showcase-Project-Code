@@ -8,17 +8,17 @@
     ],
     "switches": {
         "path": false,
-        "firepit": true,
-        "pondOne": false,
+        "firepit": false,
+        "pondOne": true,
         "pondTwo": true,
-        "pondThree": false
+        "pondThree": true
     },
     "switchColors": {
         "path": "#d41c1c",
         "firepit": "#5972c0",
-        "pondOne": "#2447f5",
-        "pondTwo": "#000000",
-        "pondThree": "#3028a4"
+        "pondOne": "#1430b8",
+        "pondTwo": "#c81e1e",
+        "pondThree": "#19b90e"
     },
     "waterfallNames": [
         "waterfallOne",

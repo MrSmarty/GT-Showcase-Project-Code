@@ -26,7 +26,7 @@
         "waterfallThree"
     ],
     "waterfalls": {
-        "waterfallOne": false,
+        "waterfallOne": true,
         "waterfallTwo": true,
         "waterfallThree": true
     },
@@ -40,6 +40,6 @@
         "waterfallTwo": 2,
         "waterfallThree": 3
     },
-    "hardware": false,
+    "hardware": true,
     "debug": false
 }

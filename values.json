@@ -7,11 +7,11 @@
         "pondThree"
     ],
     "switches": {
-        "path": false,
-        "firepit": false,
-        "pondOne": false,
-        "pondTwo": false,
-        "pondThree": false,
+        "path": true,
+        "firepit": true,
+        "pondOne": true,
+        "pondTwo": true,
+        "pondThree": true,
         "path=on": true,
         "firepit=on": true,
         "pondOne=on": true,
@@ -21,11 +21,11 @@
         "pondTwoColor=%23000000": true
     },
     "switchColors": {
-        "path": "#000000",
-        "firepit": "#5972c0",
-        "pondOne": "#1430b8",
-        "pondTwo": "#c81e1e",
-        "pondThree": "#19b90e",
+        "path": "#8f2d2d",
+        "firepit": "#4f4f4f",
+        "pondOne": "#1d9034",
+        "pondTwo": "#1968e6",
+        "pondThree": "#000000",
         "path=on": "pathColor=%23000000",
         "firepit=on": "firepitColor=%235972c0",
         "pondOne=on": "pondOneColor=%231430b8",
@@ -40,7 +40,7 @@
     ],
     "waterfalls": {
         "waterfallOne": false,
-        "waterfallTwo": false,
+        "waterfallTwo": true,
         "waterfallThree": false
     },
     "waterfallHeaders": {

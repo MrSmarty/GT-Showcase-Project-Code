@@ -4,6 +4,7 @@
     "gpio": "^0.2.10",
     "http": "^0.0.1-security",
     "jquery": "^3.6.0",
+    "node-run-cmd": "^1.0.1",
     "onoff": "^6.0.3",
     "open": "^8.4.0",
     "philips-hue": "^1.2.0",

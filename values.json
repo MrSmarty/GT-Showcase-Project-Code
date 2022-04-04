@@ -1,45 +1,35 @@
 {
-    "switchNames": [
-        "firepit",
-        "path",
-        "pondOne",
-        "pondTwo",
-        "pondThree"
-    ],
-    "switches": {
-        "path": true,
-        "firepit": true,
-        "pondOne": true,
-        "pondTwo": true,
-        "pondThree": false
-    },
-    "switchColors": {
-        "path": "#d41c1c",
-        "firepit": "#5972c0",
-        "pondOne": "#1430b8",
-        "pondTwo": "#c81e1e",
-        "pondThree": "#19b90e"
-    },
-    "waterfallNames": [
-        "waterfallOne",
-        "waterfallTwo",
-        "waterfallThree"
-    ],
-    "waterfalls": {
-        "waterfallOne": true,
-        "waterfallTwo": true,
-        "waterfallThree": true
-    },
-    "waterfallHeaders": {
-        "waterfallOne": 17,
-        "waterfallTwo": 27,
-        "waterfallThree": 22
-    },
-    "waterfallIndex": {
-        "waterfallOne": 1,
-        "waterfallTwo": 2,
-        "waterfallThree": 3
-    },
-    "hardware": true,
-    "debug": false
+  "switchNames": ["firepit", "path", "pondOne", "pondTwo", "pondThree"],
+  "switches": {
+    "path": true,
+    "firepit": true,
+    "pondOne": true,
+    "pondTwo": true,
+    "pondThree": false
+  },
+  "switchColors": {
+    "path": "#d41c1c",
+    "firepit": "#5972c0",
+    "pondOne": "#1430b8",
+    "pondTwo": "#c81e1e",
+    "pondThree": "#19b90e"
+  },
+  "waterfallNames": ["waterfallOne", "waterfallTwo", "waterfallThree"],
+  "waterfalls": {
+    "waterfallOne": true,
+    "waterfallTwo": true,
+    "waterfallThree": true
+  },
+  "waterfallHeaders": {
+    "waterfallOne": 17,
+    "waterfallTwo": 27,
+    "waterfallThree": 22
+  },
+  "waterfallIndex": {
+    "waterfallOne": 1,
+    "waterfallTwo": 2,
+    "waterfallThree": 3
+  },
+  "hardware": false,
+  "debug": false
 }

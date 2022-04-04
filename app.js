@@ -4,22 +4,32 @@
 
 var http = require("http");
 var fs = require("fs");
+const { exec } = require("child_process");
+const nrc = require("node-run-cmd");
 
 let values = getJson();
 
-
-if (values.hardware) { var Gpio = require('onoff').Gpio; }
+if (values.hardware) {
+  var Gpio = require("onoff").Gpio;
+}
 const open = require("open");
 const si = require("systeminformation");
 
-
 // Get GPIO Pins
-if (values.hardware) { var pins = [new Gpio(4, 'out'), new Gpio(17, 'out'), new Gpio(27, 'out'), new Gpio(22, 'out'), new Gpio(23, 'out')]; }
+if (values.hardware) {
+  var pins = [
+    new Gpio(4, "out"),
+    new Gpio(17, "out"),
+    new Gpio(27, "out"),
+    new Gpio(22, "out"),
+    new Gpio(23, "out"),
+  ];
+}
 update();
+backup();
 
 // Create a function to handle every HTTP request
 function handler(req, res) {
-
   var form = "";
 
   if (req.method == "GET") {
@@ -121,9 +131,13 @@ function allOff() {
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
     if (values.waterfalls[values.waterfallNames[i]] == true) {
-      if (values.hardware) { pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(1); }
+      if (values.hardware) {
+        pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(1);
+      }
     } else {
-      if (values.hardware) { pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(0); }
+      if (values.hardware) {
+        pins[values.waterfallIndex[values.waterfallNames[i]]].writeSync(0);
+      }
     }
   }
 }
@@ -165,44 +179,64 @@ if (values.hardware) {
 http.createServer(handler).listen(port, "0.0.0.0", function (err) {
   if (err) {
     console.log("Error starting http server");
-    if (values.hardware) { pins[0].writeSync(0); }
+    if (values.hardware) {
+      pins[0].writeSync(0);
+    }
   } else {
     console.log(
-      "Server running at http://127.0.0.1:%d/ or http://localhost:%d/", port, port
+      "Server running at http://127.0.0.1:%d/ or http://localhost:%d/",
+      port,
+      port
     );
-    if (values.hardware) { pins[0].writeSync(1); }
+    if (values.hardware) {
+      pins[0].writeSync(1);
+    }
   }
 });
 
 function clean() {
-
   if (values.hardware) {
     for (var i = 0; i < pins.length; i++) {
       pins[i].writeSync(0);
     }
   }
+}
 
+function backup() {
+  // Linux
+  exec("git add *");
+  exec("git commit -m 'backup'");
+  exec("git push");
+
+  // Windows
+  nrc.run("git add *");
+  nrc.run("git commit -m 'backup'");
+  nrc.run("git push");
+
+  // Log
+  console.log("backup complete");
 }
 
 // Handle application Quit
-process.stdin.resume();//so the program will not close instantly
+process.stdin.resume(); //so the program will not close instantly
 
 function exitHandler(options, exitCode) {
+  backup();
+  clean();
   if (options.cleanup) clean();
   if (exitCode || exitCode === 0) console.log(exitCode);
   if (options.exit) process.exit();
 }
 
 //do something when app is closing
-process.on('exit', exitHandler.bind(null, { cleanup: true }));
+process.on("exit", exitHandler.bind(null, { cleanup: true }));
 
 //catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, { exit: true }));
+process.on("SIGINT", exitHandler.bind(null, { exit: true }));
 
 // catches "kill pid" (for example: nodemon restart)
-process.on('SIGUSR1', exitHandler.bind(null, { exit: true }));
-process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
+process.on("SIGUSR1", exitHandler.bind(null, { exit: true }));
+process.on("SIGUSR2", exitHandler.bind(null, { exit: true }));
 
 //catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
-
+process.on("uncaughtException", exitHandler.bind(null, { exit: true }));

@@ -16,18 +16,22 @@
         "firepit=on": true,
         "pondOne=on": true,
         "pondTwo=on": true,
-        "pondThreeColor=%23000000": true
+        "pondThreeColor=%23000000": true,
+        "firepitColor=%23000000": true,
+        "pondTwoColor=%23000000": true
     },
     "switchColors": {
-        "path": "#d41c1c",
+        "path": "#000000",
         "firepit": "#5972c0",
         "pondOne": "#1430b8",
         "pondTwo": "#c81e1e",
         "pondThree": "#19b90e",
-        "path=on": "pathColor=%23d41c1c",
+        "path=on": "pathColor=%23000000",
         "firepit=on": "firepitColor=%235972c0",
         "pondOne=on": "pondOneColor=%231430b8",
-        "pondTwo=on": "pondTwoColor=%23c81e1e"
+        "pondTwo=on": "pondTwoColor=%23c81e1e",
+        "firepitColor=%23000000": "pondOneColor=%23000000",
+        "pondTwoColor=%23000000": "pondThreeColor=%23000000"
     },
     "waterfallNames": [
         "waterfallOne",

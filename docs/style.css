@@ -34,3 +34,15 @@ body {
   font-family: "Josefin Sans", sans-serif;
   background-color: #273e47;
 }
+
+@media (max-width: 1000px) {
+  body {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 1em;
+  }
+}

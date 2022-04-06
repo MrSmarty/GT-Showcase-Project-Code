@@ -1,92 +1,118 @@
 <!-- View on GitHub Pages: https://mrsmarty.github.io/GT-Showcase-Project-Code/ -->
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="navBar.css" />
 
-    <meta charset="UTF-8" />
-    <meta name="description" content="Lincoln's GT Showcase Project Site" />
-    <meta name="author" content="Lincoln Smith" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <navbar>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="navBar.css" />
+
+  <meta charset="UTF-8" />
+  <meta name="description" content="Lincoln's GT Showcase Project Site" />
+  <meta name="author" content="Lincoln Smith" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <navbar>
+    <ul>
+      <li><a class="active" href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="https://waterscapemanager.ml">Project</a></li>
+    </ul>
+  </navbar>
+  <h1>Lincoln's Adventures in Web Servers, Remote Access, and APIs</h1>
+  <h2>Lincoln E. Smith</h2>
+  <div class="block">
+    <h3>Synopsis:</h3>
+    <p>
+      For my projecty, I created a system to control the lights, waterfalls,
+      and other features of a waterscape we will be constructing at my house.
+      The system is controlled remotely and can be accessed from anywhere with
+      an internet connection. For the purpose of this demonstration, I have
+      constructed a small demo scene consisting of the Phillips-Hue lights,
+      and a few LEDs to demonstrate turning on and off the waterfalls.
+    </p>
+  </div>
+  <div class="block">
+    <h3>How it Works (Simple):</h3>
+    <p>
+      The Raspberry Pi is a tiny computer that is connected to the internet.
+      It hosts a small website that waits for an input from a user. When it
+      recieves an input, it sends it back to the Pi. The Raspberry Pi then
+      decodes the input and figures out what to do with it. The Pi will then
+      tell the various components what to do and they will do it.
+    </p>
+  </div>
+  <div class="block">
+    <h3>How it Works:</h3>
+    <h4>Backstory:</h4>
+    <p>
+      The Raspberry Pi is a 64-bit quad-core computer notable for being the
+      size of a credit card, yet having the capabilities to power dual 4K
+      displays and run your standard office apps. Running a custom version of
+      Linux (Pi OS), the Raspberry Pi is commonly used in the DIY tech
+      industry as a server machine or an automator due to its small
+      form-factor and easy access to GPIO pins. When I first thought of this
+      project, my mind went straight to a Pi, and it worked perfectly.
+    </p>
+    <h4>The Server:</h4>
+    <p>
+      The Web server is hosted via Node.JS using the <i>http</i> package. When
+      the program runs, the app creates a web server hosted at port
+      <hide title="Redacted">8006</hide>. The server serves up an HTML page
+      that is read using the <i>fs</i> package. Sadly, I could not figure out
+      how to also serve a CSS and JavaScript file alongside the HTML file
+      without hosting another server so I used inline code for the CSS and
+      JavaScript. The server reads and stores all the data in a JSON file so
+      that the system can be shut off and turned back on with no loss of data.
+    </p>
+  </div>
+  <div class="block">
+    <h3>Parts Used:</h3>
+    <ul>
+      <li>Raspberry Pi 4, Model B (8GB) running Pi OS</li>
       <ul>
-        <li><a class="active" href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="https://waterscapemanager.ml">Project</a></li>
+        <li>
+          Broadcom BCM2711, Quad core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz
+        </li>
+        <li>8GB DDR4-3200 SDRAM</li>
+        <li>40 pin GPIO header</li>
+        <li>128GB storage</li>
       </ul>
-    </navbar>
-    <h1>Lincoln's Adventures in Web Servers, Remote Access, and APIs</h1>
-    <h2>Lincoln E. Smith</h2>
-    <div class="block">
-      <h3>Synopsis:</h3>
-      <p>
-        For my projecty, I created a system to control the lights, waterfalls,
-        and other features of a waterscape we will be constructing at my house.
-        The system is controlled remotely and can be accessed from anywhere with
-        an internet connection. For the purpose of this demonstration, I have
-        constructed a small demo scene consisting of the Phillips-Hue lights,
-        and a few LEDs to demonstrate turning on and off the waterfalls.
-      </p>
-    </div>
-    <div class="block">
-      <h3>How it Works (Simple):</h3>
-      <p>
-        The Raspberry Pi is a tiny computer that is connected to the internet.
-        It hosts a small website that waits for an input from a user. When it
-        recieves an input, it sends it back to the Pi. The Raspberry Pi then
-        decodes the input and figures out what to do with it. The Pi will then
-        tell the various components what to do and they will do it.
-      </p>
-    </div>
-    <div class="block">
-      <h3>How it Works:</h3>
-      <h4>Backstory:</h4>
-      <p>
-        The Raspberry Pi is a 64-bit quad-core computer notable for being the
-        size of a credit card, yet having the capabilities to power dual 4K
-        displays and run your standard office apps. Running a custom version of
-        Linux (Pi OS), the Raspberry Pi is commonly used in the DIY tech
-        industry as a server machine or an automator due to its small
-        form-factor and easy access to GPIO pins. When I first thought of this
-        project, my mind went straight to a Pi, and it worked perfectly.
-      </p>
-      <h4>The Server:</h4>
-      <p>
-        The Web server is hosted via Node.JS using the <i>http</i> package. When
-        the program runs, the app creates a web server hosted at port
-        <hide title="Redacted">8006</hide>. The server serves up an HTML page
-        that is read using the <i>fs</i> package. Sadly, I could not figure out
-        how to also serve a CSS and JavaScript file alongside the HTML file
-        without hosting another server so I used inline code for the CSS and
-        JavaScript. The server reads and stores all the data in a JSON file so
-        that the system can be shut off and turned back on with no loss of data.
-      </p>
-    </div>
-    <div class="block">
-      <h3>Parts Used:</h3>
-      <ul>
-        <li>Raspberry Pi 4, Model B (8GB) running Pi OS</li>
-        <ul>
-          <li>
-            Broadcom BCM2711, Quad core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz
-          </li>
-          <li>8GB DDR4-3200 SDRAM</li>
-          <li>40 pin GPIO header</li>
-          <li>128GB storage</li>
-        </ul>
-        <li>Phillips-Hue Lighting Ecosystem</li>
-        <li>Sainsmart 16 Channel Relay Board</li>
-        <li>Breadboard</li>
-        <li>Jumper Wires</li>
-        <li>LEDs</li>
-        <li>Resistors</li>
-        <li>Ethernet Cable</li>
-      </ul>
-    </div>
-  </body>
+      <li>Phillips-Hue Lighting Ecosystem</li>
+      <li>Sainsmart 16 Channel Relay Board</li>
+      <li>Breadboard</li>
+      <li>Jumper Wires</li>
+      <li>LEDs</li>
+      <li>Resistors</li>
+      <li>Ethernet Cable</li>
+    </ul>
+  </div>
+  <footer>
+    <table>
+      <tr>
+        <th>Presentation</th>
+        <th>Project</th>
+        <th>Github</th>
+      </tr>
+      <tr>
+        <td><a class="link" href="index.html">Home</a></td>
+        <td><a class="link" href="https://waterscapemanager.ml">Project Site</a></td>
+        <td><a class="link" href="https://github.com/MrSmarty">My Github</a></td>
+      </tr>
+      <tr>
+        <td><a class="link" href="about.html">About</a></td>
+        <td></td>
+        <td><a class="link" href="https://github.com/MrSmarty/GT-Showcase-Project-Code/settings">Project Repository</a>
+        </td>
+      </tr>
+      <tr>
+        <td><a class="link" href="gallery.html">Gallery</a></td>
+      </tr>
+    </table>
+  </footer>
+</body>
+
 </html>

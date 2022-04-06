@@ -26,9 +26,38 @@ h2 {
   text-align: center;
 }
 
+footer {
+  text-align: left;
+
+  display: inline-block;
+  font-size: 0.8em;
+  bottom: 0%;
+  height: 20em;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #172e37;
+}
+
+footer table {
+  margin: 0.5em;
+}
+
+footer td {
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+footer th {
+  text-align: center;
+}
+
 body {
   font-size: 1.4em;
   line-height: 2em;
+  margin: 0px;
   margin-top: 5em;
   color: #f3fcf0;
   font-family: "Josefin Sans", sans-serif;
@@ -56,5 +85,8 @@ body {
 @media (max-width: 600px) {
   body {
     font-size: 0.6em;
+  }
+  .block {
+    font-size: 0.8em;
   }
 }

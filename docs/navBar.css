@@ -12,12 +12,16 @@ navbar ul {
   overflow: hidden;
   background-color: #bd632f;
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 navbar li {
   text-align: center;
   width: 4.2em;
   float: left;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 navbar li a {
@@ -26,6 +30,8 @@ navbar li a {
   text-align: center;
   padding: 0.8em 0em;
   text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 navbar li a:hover:not(.active) {

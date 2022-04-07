@@ -13,6 +13,7 @@
 }
 
 .code {
+  padding: 0.2em;
   color: #1B998B;
   background: #172e37;
   font-family: "Roboto Mono", monospace;
@@ -34,7 +35,7 @@ h2 {
 }
 
 footer {
-  text-align: left;
+  text-align: center;
 
   /* display: inline-block; */
   font-size: 0.8em;
@@ -46,7 +47,10 @@ footer {
 }
 
 footer table {
-  margin: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 footer td {
@@ -55,7 +59,7 @@ footer td {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   column-width: auto;
-  text-align: left;
+  text-align: center;
 }
 
 footer th {

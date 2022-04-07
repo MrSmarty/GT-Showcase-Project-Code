@@ -73,12 +73,15 @@
       When the client (Website) sends the data back to the Pi, it is split up into two different groups; Hardware and
       Software. The data is deciphered and sent to be stored in the JSON file. To store the data, the Pi first sets all
       the values to false in the JSON file. Then it takes the string (I opted for a string instead of binary or ints to
-      improve readability) and splits it into little bits based on a delimiter. Here's a sample line of data:
-      <span
-        class="code">firepit&#4f4f4f&path&#8f2d2d&pondOne&#1d9034&pondTwo&#1968e6&pondThree&#000000&waterfallTwo
-      </span>.
-      For the hardware controls, all that is
-      required is a simple on or off.
+      improve readability) and splits it into little bits based on a delimiter. Here's a sample line of data: <br />
+      <span class="code">
+        Formdata: path|#<span style="color: #8f2d2d;">8f2d2d</span>|waterfallOne|firepit|#<span
+          style="color: #4f4f4f;">4f4f4f</span>|waterfallTwo|pondTwo|#<span style="color: #1968e6;">1968e6</span>
+      </span> <br />
+      (I have set the color of the Hexadecimal numbers to the color they represent. If you would like to learn more
+      about Hexadecimal, click here: <a class="link" href="definitions.html#hexadecimal">Definitions</a>).
+      For the hardware controls, all that is required is a simple on or off, and you can see that because they are not
+      followed by a Hexadecimal Number.
     </p>
   </div>
   <div class="block">
@@ -123,7 +126,11 @@
       <tr>
         <td><a class="link" href="gallery.html">Gallery</a></td>
       </tr>
+      <tr>
+        <td><a class="link" href="definitions.html">Definitions</a></td>
+      </tr>
     </table>
+    <span class="copyright">&copy; Copyright 2022 Lincoln Smith</span>
   </footer>
 </body>
 

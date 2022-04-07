@@ -30,8 +30,6 @@ navbar li a {
   text-align: center;
   padding: 0.8em 0em;
   text-decoration: none;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 navbar li a:hover:not(.active) {
@@ -53,6 +51,7 @@ navbar {
 
 @media (max-width: 400px) {
   navbar li {
+    font-size: 0.8em;
     width: auto;
   }
 }

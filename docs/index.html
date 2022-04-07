@@ -36,7 +36,7 @@
     </p>
   </div>
   <div class="block">
-    <h3>How it Works (Simple):</h3>
+    <h3>How it Works (Simplified):</h3>
     <p>
       The Raspberry Pi is a tiny computer that is connected to the internet.
       It hosts a small website that waits for an input from a user. When it
@@ -67,6 +67,18 @@
       without hosting another server so I used inline code for the CSS and
       JavaScript. The server reads and stores all the data in a JSON file so
       that the system can be shut off and turned back on with no loss of data.
+    </p>
+    <h4>Recieving the Data</h4>
+    <p>
+      When the client (Website) sends the data back to the Pi, it is split up into two different groups; Hardware and
+      Software. The data is deciphered and sent to be stored in the JSON file. To store the data, the Pi first sets all
+      the values to false in the JSON file. Then it takes the string (I opted for a string instead of binary or ints to
+      improve readability) and splits it into little bits based on a delimiter. Here's a sample line of data:
+      <span
+        class="code">firepit&#4f4f4f&path&#8f2d2d&pondOne&#1d9034&pondTwo&#1968e6&pondThree&#000000&waterfallTwo
+      </span>.
+      For the hardware controls, all that is
+      required is a simple on or off.
     </p>
   </div>
   <div class="block">

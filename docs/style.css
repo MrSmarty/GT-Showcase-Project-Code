@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 .block {
   width: 80%;
@@ -9,6 +10,12 @@
 .link {
   color: #59a5d8;
   text-decoration: none;
+}
+
+.code {
+  color: #1B998B;
+  background: #172e37;
+  font-family: "Roboto Mono", monospace;
 }
 
 hide {
@@ -29,10 +36,9 @@ h2 {
 footer {
   text-align: left;
 
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 0.8em;
   bottom: 0%;
-  height: 20em;
   width: 100%;
   margin: 0px;
   padding: 0px;
@@ -44,10 +50,12 @@ footer table {
 }
 
 footer td {
-  padding-left: 1.2em;
-  padding-right: 1.2em;
+  padding-left: 2em;
+  padding-right: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+  column-width: auto;
+  text-align: left;
 }
 
 footer th {
@@ -58,6 +66,8 @@ body {
   font-size: 1.4em;
   line-height: 2em;
   margin: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
   margin-top: 5em;
   color: #f3fcf0;
   font-family: "Josefin Sans", sans-serif;

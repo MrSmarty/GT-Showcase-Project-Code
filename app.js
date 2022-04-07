@@ -84,7 +84,7 @@ function handler(req, res) {
           form = "Completed";
         }
 
-        var val = formdata.split("&");
+        var val = formdata.split("|");
 
         for (var i = 0; i < values.switchNames.length; i++) {
           values.switches[values.switchNames[i]] = false;
@@ -154,13 +154,13 @@ function getValues() {
   for (var i = 0; i < values.switchNames.length; i++) {
     var name = values.switchNames[i];
     if (values.switches[name] == true) {
-      on += "&" + values.switchNames[i] + "&" + values.switchColors[name];
+      on += "|" + values.switchNames[i] + "|" + values.switchColors[name];
     }
   }
   for (var i = 0; i < values.waterfallNames.length; i++) {
     var name = values.waterfallNames[i];
     if (values.waterfalls[name] == true) {
-      on += "&" + values.waterfallNames[i];
+      on += "|" + values.waterfallNames[i];
     }
   }
 

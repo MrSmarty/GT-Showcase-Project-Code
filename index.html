@@ -48,11 +48,11 @@
               document.forms["selection"][i].name.substring(0, 5) != "water"
             ) {
               // Send name
-              formdata += document.forms["selection"][i].name + "&";
+              formdata += document.forms["selection"][i].name + "|";
               // Send color
-              formdata += document.forms["selection"][i + 1].value + "&";
+              formdata += document.forms["selection"][i + 1].value + "|";
             } else {
-              formdata += document.forms["selection"][i].name + "&";
+              formdata += document.forms["selection"][i].name + "|";
             }
           }
         }
@@ -68,7 +68,7 @@
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
           document.getElementById("output").innerHTML = xmlhttp.responseText;
-          var response = xmlhttp.responseText.split("&");
+          var response = xmlhttp.responseText.split("|");
           if (response[0] == "values") {
             console.log("Setting values...\nLength: " + response.length);
 

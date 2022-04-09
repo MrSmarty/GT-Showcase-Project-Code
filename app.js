@@ -154,7 +154,7 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
-manageLight(1, "#CC22CC", true);
+manageLight(1, "CC22CC", true);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
@@ -203,6 +203,8 @@ function getHSV(hex) {
   hsv.h *= 182;
   hsv.s *= 2.54;
   hsv.v *= 2.54;
+  Math.round(hsv.s);
+  Math.round(hxv.v);
   // console.log(hsv);
   return hsv;
 }

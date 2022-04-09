@@ -8,33 +8,14 @@
 const http = require("http");
 const fs = require("fs");
 const colorsys = require("colorsys");
-const Hue = require("philips-hue");
+const axios = require("axios");
 
 // Backups
 const { exec } = require("child_process");
 const nrc = require("node-run-cmd");
 
-var hue = new Hue();
-
-hue
-  .getBridges()
-  .then(function (bridges) {
-    console.log(bridges);
-    var bridge = bridges[0]; // use 1st bridge
-    console.log("bridge: " + bridge);
-    return hue.auth(bridge);
-  })
-  .then(function (username) {
-    console.log("username: " + username);
-
-    // controll Hue lights
-    hue.light(1).off();
-    // hue.light(2).off();
-    // hue.light(3).setState({ hue: 50000, sat: 200, bri: 90 });
-  })
-  .catch(function (err) {
-    console.error(err.stack || err);
-  });
+const bridgeIp = "192.168.1.111";
+const username = "6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh";
 
 let values = getJson();
 
@@ -155,7 +136,25 @@ function allOff() {
   console.log("All lights are off");
 }
 
-function manageLight(id, hex, value) {}
+const manageLight = async (id, hex, value) => {
+  const url =
+    "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
+  var hsb = getHSB(hex);
+  var h = hsb[0] * 182;
+  var s = hsb[1];
+  var b = hsb[2];
+
+  try {
+    return await axios.put(url, {
+      on: value,
+      ...(h && { hue: h }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+manageLight(1, "ff4444", true);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {

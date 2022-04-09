@@ -144,14 +144,16 @@ const manageLight = async (id, hex, value) => {
   try {
     return await axios.put(url, {
       on: value,
+      hue: hsl.h,
+      sat: hsl.s,
+      bri: hsl.l,
     });
   } catch (err) {
     console.error(err);
   }
 };
 
-manageLight(1, "FF0000", true);
-getHSL("FFFFFF");
+manageLight(1, "4417e8", true);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
@@ -196,7 +198,9 @@ function getValues() {
 
 function getHSL(hex) {
   var hsl = colorsys.hex2Hsl(hex);
-  console.log(hsl);
+  // console.log(hsl);
+  hsl.h *= 182;
+  // console.log(hsl);
   return hsl;
 }
 

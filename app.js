@@ -154,8 +154,8 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
-manageLight(1, "CC22CC", true);
-manageLight(2, "CC88CC", true);
+manageLight(1, "CC88CC", true);
+manageLight(2, "EE11EE", true);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {

@@ -1,19 +1,46 @@
 // PC: 192.168.1.156
 // Pi: 192.168.1.156:8006
 // Pi External: 107.217.165.178:8006
+// Hue IP: 192.168.1.111
+// Hue manager: 6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh
 
-var http = require("http");
-var fs = require("fs");
+// Application
+const http = require("http");
+const fs = require("fs");
+const colorsys = require("colorsys");
+const Hue = require("philips-hue");
+
+// Backups
 const { exec } = require("child_process");
 const nrc = require("node-run-cmd");
+
+var hue = new Hue();
+
+hue
+  .getBridges()
+  .then(function (bridges) {
+    console.log(bridges);
+    var bridge = bridges[0]; // use 1st bridge
+    console.log("bridge: " + bridge);
+    return hue.auth(bridge);
+  })
+  .then(function (username) {
+    console.log("username: " + username);
+
+    // controll Hue lights
+    hue.light(1).off();
+    // hue.light(2).off();
+    // hue.light(3).setState({ hue: 50000, sat: 200, bri: 90 });
+  })
+  .catch(function (err) {
+    console.error(err.stack || err);
+  });
 
 let values = getJson();
 
 if (values.hardware) {
   var Gpio = require("onoff").Gpio;
 }
-const open = require("open");
-const si = require("systeminformation");
 
 // Get GPIO Pins
 if (values.hardware) {
@@ -128,6 +155,8 @@ function allOff() {
   console.log("All lights are off");
 }
 
+function manageLight(id, hex, value) {}
+
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
     if (values.waterfalls[values.waterfallNames[i]] == true) {
@@ -167,6 +196,10 @@ function getValues() {
   console.log("getValues: " + on);
 
   return on;
+}
+
+function getHSB(hex) {
+  return colorsys.hex2Hsl(hex);
 }
 
 // Create a server that invokes the `handler` function upon receiving a request

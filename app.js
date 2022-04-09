@@ -139,14 +139,15 @@ function allOff() {
 const manageLight = async (id, hex, value) => {
   const url =
     "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
-  var hsl = getHSL(hex);
+  var hsv = getHSV(hex);
+  console.log(hsv);
 
   try {
     return await axios.put(url, {
       on: value,
-      hue: hsl.h,
-      sat: hsl.s,
-      bri: hsl.l,
+      hue: hsv.h,
+      sat: hsv.s,
+      bri: hsv.v,
     });
   } catch (err) {
     console.error(err);
@@ -196,12 +197,12 @@ function getValues() {
   return on;
 }
 
-function getHSL(hex) {
-  var hsl = colorsys.hex2Hsl(hex);
-  // console.log(hsl);
-  hsl.h *= 182;
-  // console.log(hsl);
-  return hsl;
+function getHSV(hex) {
+  var hsv = colorsys.hex2Hsv(hex);
+  // console.log(hsv);
+  hsl.v *= 182;
+  // console.log(hsv);
+  return hsv;
 }
 
 // Create a server that invokes the `handler` function upon receiving a request

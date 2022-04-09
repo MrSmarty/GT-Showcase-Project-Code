@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^0.26.1",
+    "color-system": "^0.1.0",
     "colorsys": "^1.0.22",
     "fs": "^0.0.1-security",
     "gpio": "^0.2.10",

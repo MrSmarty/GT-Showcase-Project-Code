@@ -200,11 +200,9 @@ function getValues() {
 function getHSV(hex) {
   var hsv = colorsys.hex2Hsv(hex);
   // console.log(hsv);
-  hsv.h *= 182;
-  hsv.s *= 2.54;
-  hsv.v *= 2.54;
-  Math.round(hsv.s);
-  Math.round(hxv.v);
+  hsv.h = Math.round(hsv.h * 182);
+  hsv.s = Math.round(hsv.s * 2.54);
+  hsv.v = Math.round(hsv.v * 2.54);
   // console.log(hsv);
   return hsv;
 }

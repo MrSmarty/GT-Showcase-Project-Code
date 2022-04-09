@@ -141,6 +141,7 @@ const manageLight = async (id, hex, value) => {
     "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
   var hsb = getHSB(hex);
   var h = hsb.h * 182;
+  console.log(h);
   var s = hsb[1];
   var b = hsb[2];
 
@@ -154,7 +155,7 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
-manageLight(1, "00ff00", true);
+manageLight(1, "FF0000", true);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {

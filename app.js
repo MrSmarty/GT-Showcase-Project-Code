@@ -140,7 +140,7 @@ const manageLight = async (id, hex, value) => {
   const url =
     "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
   var hsb = getHSB(hex);
-  var h = hsb.h * 182;
+  var h = hsb.h;
   console.log(h);
   var s = hsb[1];
   var b = hsb[2];

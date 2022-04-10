@@ -14,8 +14,8 @@
         "pondThree": false
     },
     "switchColors": {
-        "path": "#5323cd",
-        "firepit": "#c5ae9b",
+        "path": "#bb1307",
+        "firepit": "#ac0ed8",
         "pondOne": "#1430b8",
         "pondTwo": "#c81e1e",
         "pondThree": "#19b90e"
@@ -43,13 +43,12 @@
     "areas": {
         "path": {
             "ids": [
-                1
+                1,
+                2
             ]
         },
         "firepit": {
-            "ids": [
-                2
-            ]
+            "ids": []
         },
         "pondOne": {
             "ids": []

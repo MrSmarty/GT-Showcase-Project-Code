@@ -170,8 +170,7 @@ const manageLight = async (id, hex, value) => {
 };
 
 const getLightData = async (id) => {
-  const url =
-    "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
+  const url = "http://" + bridgeIp + "/api/" + username + "/lights/" + id;
   try {
     return await axios.get(url);
   } catch (err) {

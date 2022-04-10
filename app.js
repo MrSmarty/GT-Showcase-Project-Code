@@ -13,6 +13,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // Backups
 const { exec } = require("child_process");
 const nrc = require("node-run-cmd");
+const { captureRejections } = require("events");
 
 const bridgeIp = "192.168.1.111";
 const username = "6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh";
@@ -168,6 +169,49 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
+const getLightData = async (id) => {
+  const url =
+    "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
+  try {
+    return await axios.get(url);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+console.log(getLightData(1));
+
+/**
+ *
+ * @param {int[]} lights Array of light IDs to manage
+ * @param {int} hue Hue to set to or add/subtract from
+ * @param {boolean} mode true for add, false for set
+ */
+const setHue = async (lights, hue, mode) => {
+  for (var i = 0; i < lights.length; i++) {
+    var url =
+      "http://" +
+      bridgeIp +
+      "/api/" +
+      username +
+      "/lights/" +
+      lights[i] +
+      "/state";
+    var data = await getLightData(lights[i]);
+    try {
+      if (mode) {
+        return await axios.put(url, { hue: data.hue + hue });
+      } else {
+        return await axios.put(url, { hue: hue });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+};
+
+setHue(1, -1, false);
+
 function updateLights() {
   for (var i = 0; i < values.switchNames.length; i++) {
     console.log(values.areas[values.switchNames[i]].ids.length);
@@ -197,6 +241,7 @@ async function loop(colors, lights, interval, runtime) {
     await delay(interval);
   }
 }
+
 //#endregion
 
 // loop(

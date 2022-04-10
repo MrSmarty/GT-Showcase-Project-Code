@@ -139,12 +139,13 @@ function allOff() {
 
 function updateLights() {
   for (var i = 0; i < values.switchNames.length; i++) {
-    for (var k = 0; k < values.areas.switchNames[i].ids.length; k++) {
-      // manageLight(
-      //   values.areas[switchNames[i]][k],
-      //   values.switchColors[switchNames[k]],
-      //   values.switches[switchNames[k]]
-      // );
+    console.log(values.areas[values.switchNames[i]].ids.length);
+    for (var k = 0; k < values.areas[values.switchNames[i]].ids.length; k++) {
+      manageLight(
+        values.areas[values.switchNames[i]].ids[k],
+        values.switchColors[values.switchNames[i]],
+        values.switches[values.switchNames[i]]
+      );
     }
   }
 }
@@ -195,15 +196,17 @@ function getValues() {
 
   for (var i = 0; i < values.switchNames.length; i++) {
     var name = values.switchNames[i];
-    if (values.switches[name] == true) {
-      on += "&" + values.switchNames[i] + "&" + values.switchColors[name];
-    }
+    on +=
+      "&" +
+      values.switchNames[i] +
+      "&" +
+      values.switchColors[name] +
+      "&" +
+      values.switches[name];
   }
   for (var i = 0; i < values.waterfallNames.length; i++) {
     var name = values.waterfallNames[i];
-    if (values.waterfalls[name] == true) {
-      on += "&" + values.waterfallNames[i];
-    }
+    on += "&" + values.waterfallNames[i] + "&" + values.waterfalls[name];
   }
 
   console.log("getValues: " + on);

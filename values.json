@@ -1,52 +1,66 @@
 {
-  "switchNames": ["firepit", "path", "pondOne", "pondTwo", "pondThree"],
-  "switches": {
-    "path": false,
-    "firepit": false,
-    "pondOne": false,
-    "pondTwo": false,
-    "pondThree": false
-  },
-  "switchColors": {
-    "path": "#d41c1c",
-    "firepit": "#5972c0",
-    "pondOne": "#1430b8",
-    "pondTwo": "#c81e1e",
-    "pondThree": "#19b90e"
-  },
-  "waterfallNames": ["waterfallOne", "waterfallTwo", "waterfallThree"],
-  "waterfalls": {
-    "waterfallOne": false,
-    "waterfallTwo": false,
-    "waterfallThree": false
-  },
-  "waterfallHeaders": {
-    "waterfallOne": 17,
-    "waterfallTwo": 27,
-    "waterfallThree": 22
-  },
-  "waterfallIndex": {
-    "waterfallOne": 1,
-    "waterfallTwo": 2,
-    "waterfallThree": 3
-  },
-  "areas": {
-    "path": {
-      "ids": [1]
+    "switchNames": [
+        "firepit",
+        "path",
+        "pondOne",
+        "pondTwo",
+        "pondThree"
+    ],
+    "switches": {
+        "path": true,
+        "firepit": false,
+        "pondOne": false,
+        "pondTwo": false,
+        "pondThree": false
     },
-    "firepit": {
-      "ids": [2]
+    "switchColors": {
+        "path": "#c20f0f",
+        "firepit": "#5972c0",
+        "pondOne": "#1430b8",
+        "pondTwo": "#c81e1e",
+        "pondThree": "#19b90e"
     },
-    "pondOne": {
-      "ids": []
+    "waterfallNames": [
+        "waterfallOne",
+        "waterfallTwo",
+        "waterfallThree"
+    ],
+    "waterfalls": {
+        "waterfallOne": false,
+        "waterfallTwo": false,
+        "waterfallThree": false
     },
-    "pondTwo": {
-      "ids": []
+    "waterfallHeaders": {
+        "waterfallOne": 17,
+        "waterfallTwo": 27,
+        "waterfallThree": 22
     },
-    "pondThree": {
-      "ids": []
-    }
-  },
-  "hardware": false,
-  "debug": false
+    "waterfallIndex": {
+        "waterfallOne": 1,
+        "waterfallTwo": 2,
+        "waterfallThree": 3
+    },
+    "areas": {
+        "path": {
+            "ids": [
+                1
+            ]
+        },
+        "firepit": {
+            "ids": [
+                2
+            ]
+        },
+        "pondOne": {
+            "ids": []
+        },
+        "pondTwo": {
+            "ids": []
+        },
+        "pondThree": {
+            "ids": []
+        }
+    },
+    "hardware": false,
+    "debug": false
 }

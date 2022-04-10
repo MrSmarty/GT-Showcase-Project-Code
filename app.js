@@ -139,7 +139,7 @@ function allOff() {
 
 function updateLights() {
   for (var i = 0; i < values.switchNames.length; i++) {
-    for (var k = 0; k < values.areas[switchNames[i]].length; k++) {
+    for (var k = 0; k < values.areas.switchNames[i].ids.length; k++) {
       // manageLight(
       //   values.areas[switchNames[i]][k],
       //   values.switchColors[switchNames[k]],

@@ -178,7 +178,7 @@ const getLightHue = async (id) => {
     return null;
   }
 };
-console.log(getLightHue(1).PromiseResult.data.state.hue);
+console.log(getLightHue(1).symbol);
 
 /**
  *

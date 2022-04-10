@@ -199,12 +199,12 @@ async function loop(colors, lights, interval, runtime) {
 }
 //#endregion
 
-loop(
-  ["FF0000", "888800", "00FF00", "008888", "0000FF", "880088"],
-  [1, 2],
-  500,
-  25000
-);
+// loop(
+//   ["FF0000", "888800", "00FF00", "008888", "0000FF", "880088"],
+//   [1],
+//   500,
+//   25000
+// );
 
 function getJson() {
   return (json = JSON.parse(

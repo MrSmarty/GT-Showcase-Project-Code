@@ -10,6 +10,8 @@
 
   <body>
     <script>
+      var form;
+
       function retrieveData() {
         document.forms["selection"]["getValues"].checked = true;
         ajax();
@@ -103,6 +105,11 @@
 
       $(window).bind("load", function () {
         retrieveData();
+        form = document.querySelector("#form");
+        form.addEventListener("change", function () {
+          console.log("changed");
+          ajax();
+        });
       });
     </script>
     <style>
@@ -254,7 +261,13 @@
 
     <h1>Smith Family Waterscape Manager</h1>
     <p id="output"></p>
-    <form name="selection" action="" onsubmit="return ajax();" method="post">
+    <form
+      id="form"
+      name="selection"
+      action=""
+      onsubmit="return ajax();"
+      method="post"
+    >
       <table>
         <thead>
           <td>Area</td>
@@ -357,7 +370,7 @@
         </tbody>
       </table>
 
-      <input type="submit" value="Submit" class="submit" />
+      <!-- <input type="submit" value="Submit" class="submit" /> -->
 
       <label class="hidden" class="switch">
         <input type="checkbox" name="getValues" />

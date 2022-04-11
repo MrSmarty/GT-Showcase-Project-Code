@@ -169,48 +169,6 @@ const manageLight = async (id, hex, value) => {
   }
 };
 
-const getLightHue = async (id) => {
-  const url = "http://" + bridgeIp + "/api/" + username + "/lights/" + id;
-  try {
-    return await axios.get(url);
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-};
-console.log(getLightHue(1).symbol);
-
-/**
- *
- * @param {int[]} lights Array of light IDs to manage
- * @param {int} hue Hue to set to or add/subtract from
- * @param {boolean} mode true for add, false for set
- */
-const setHue = async (lights, hue, mode) => {
-  for (var i = 0; i < lights.length; i++) {
-    var url =
-      "http://" +
-      bridgeIp +
-      "/api/" +
-      username +
-      "/lights/" +
-      lights[i] +
-      "/state";
-    var data = await getLightData(lights[i]);
-    try {
-      if (mode) {
-        return await axios.put(url, { hue: data.hue + hue });
-      } else {
-        return await axios.put(url, { hue: hue });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-};
-
-setHue(1, -1, false);
-
 function updateLights() {
   for (var i = 0; i < values.switchNames.length; i++) {
     console.log(values.areas[values.switchNames[i]].ids.length);
@@ -227,12 +185,28 @@ function updateLights() {
 //#endregion
 
 //#region Light Functions
-async function loop(colors, lights, interval, runtime) {
+async function loop(lights, colors, interval, runtime) {
   var iterations = runtime / interval;
   var colorIndex = 0;
   for (var i = 0; i < iterations; i++) {
     for (var k = 0; k < lights.length; k++) {
       manageLight(lights[k], colors[colorIndex], true);
+    }
+    if (colorIndex == colors.length - 1) colorIndex = 0;
+    else colorIndex++;
+
+    await delay(interval);
+  }
+}
+
+async function sequence(lights, colors, interval, runtime) {
+  var iterations = runtime / interval;
+  var colorIndex = 0;
+  for (var i = 0; i < iterations; i++) {
+    for (var k = 0; k < lights.length; k++) {
+      manageLight(lights[k], colors[colorIndex], true);
+      if (colorIndex == colors.length - 1) colorIndex = 0;
+      else colorIndex++;
     }
     if (colorIndex == colors.length - 1) colorIndex = 0;
     else colorIndex++;
@@ -249,6 +223,8 @@ async function loop(colors, lights, interval, runtime) {
 //   500,
 //   25000
 // );
+
+//sequence([1, 2, 3], ["FF0000", "00FF00", "0000FF"], 500, 25000);
 
 function getJson() {
   return (json = JSON.parse(

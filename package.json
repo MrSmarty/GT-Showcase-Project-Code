@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "axios": "^0.26.1",
+    "color-system": "^0.1.0",
+    "colorsys": "^1.0.22",
     "fs": "^0.0.1-security",
     "gpio": "^0.2.10",
     "http": "^0.0.1-security",
@@ -7,7 +10,6 @@
     "node-run-cmd": "^1.0.1",
     "onoff": "^6.0.3",
     "open": "^8.4.0",
-    "philips-hue": "^1.2.0",
     "si": "^2.0.0",
     "systeminformation": "^5.10.7"
   }

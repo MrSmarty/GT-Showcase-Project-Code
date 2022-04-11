@@ -1,19 +1,28 @@
 // PC: 192.168.1.156
 // Pi: 192.168.1.156:8006
 // Pi External: 107.217.165.178:8006
+// Hue IP: 192.168.1.111
+// Hue manager: 6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh
 
-var http = require("http");
-var fs = require("fs");
+// Application
+const http = require("http");
+const fs = require("fs");
+const colorsys = require("colorsys");
+const axios = require("axios");
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// Backups
 const { exec } = require("child_process");
 const nrc = require("node-run-cmd");
+const { captureRejections } = require("events");
+
+const bridgeIp = "192.168.1.111";
+const username = "6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh";
 
 let values = getJson();
 
 if (values.hardware) {
   var Gpio = require("onoff").Gpio;
 }
-const open = require("open");
-const si = require("systeminformation");
 
 // Get GPIO Pins
 if (values.hardware) {
@@ -25,7 +34,8 @@ if (values.hardware) {
     new Gpio(23, "out"),
   ];
 }
-update();
+updateGPIO();
+//updateLights();
 backup();
 
 // Create a function to handle every HTTP request
@@ -51,32 +61,9 @@ function handler(req, res) {
       } else if (formdata == "allOn") {
         allOn();
         form = "All lights are on";
-
-        for (var i = 0; i < values.switchNames.length; i++) {
-          values.switches[values.switchNames[i]] = true;
-        }
-        for (var i = 0; i < values.waterfallNames.length; i++) {
-          values.waterfalls[values.waterfallNames[i]] = true;
-        }
-
-        fs.writeFileSync(
-          __dirname + "/values.json",
-          JSON.stringify(values, null, 4)
-        );
       } else if (formdata == "allOff") {
         allOff();
         form = "All lights are off";
-
-        for (var i = 0; i < values.switchNames.length; i++) {
-          values.switches[values.switchNames[i]] = false;
-        }
-        for (var i = 0; i < values.waterfallNames.length; i++) {
-          values.waterfalls[values.waterfallNames[i]] = false;
-        }
-        fs.writeFileSync(
-          __dirname + "/values.json",
-          JSON.stringify(values, null, 4)
-        );
       } else {
         if (values.debug == true) {
           form = "Input recieved: " + formdata;
@@ -107,7 +94,8 @@ function handler(req, res) {
           JSON.stringify(values, null, 4)
         );
       }
-      update();
+      updateGPIO();
+      updateLights();
 
       //respond
       res.setHeader("Content-Type", "text/html");
@@ -120,15 +108,34 @@ function handler(req, res) {
   }
 }
 
+//#region All On/Off
+
 function allOn() {
-  console.log("All lights are on");
+  for (var i = 0; i < values.switchNames.length; i++) {
+    values.switches[values.switchNames[i]] = true;
+  }
+  for (var i = 0; i < values.waterfallNames.length; i++) {
+    values.waterfalls[values.waterfallNames[i]] = true;
+  }
+
+  fs.writeFileSync(__dirname + "/values.json", JSON.stringify(values, null, 4));
+  console.log("Everything Is On");
 }
 
 function allOff() {
-  console.log("All lights are off");
+  for (var i = 0; i < values.switchNames.length; i++) {
+    values.switches[values.switchNames[i]] = false;
+  }
+  for (var i = 0; i < values.waterfallNames.length; i++) {
+    values.waterfalls[values.waterfallNames[i]] = false;
+  }
+  fs.writeFileSync(__dirname + "/values.json", JSON.stringify(values, null, 4));
+  console.log("Everything Is Off");
 }
 
-function update() {
+//#endregion
+
+function updateGPIO() {
   for (var i = 0; i < values.waterfallNames.length; i++) {
     if (values.waterfalls[values.waterfallNames[i]] == true) {
       if (values.hardware) {
@@ -142,6 +149,83 @@ function update() {
   }
 }
 
+//#region Basic Light Functions
+
+const manageLight = async (id, hex, value) => {
+  const url =
+    "http://" + bridgeIp + "/api/" + username + "/lights/" + id + "/state";
+  var hsv = getHSV(hex);
+  console.log(hsv);
+
+  try {
+    return await axios.put(url, {
+      on: value,
+      hue: hsv.h,
+      sat: hsv.s,
+      bri: hsv.v,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+function updateLights() {
+  for (var i = 0; i < values.switchNames.length; i++) {
+    console.log(values.areas[values.switchNames[i]].ids.length);
+    for (var k = 0; k < values.areas[values.switchNames[i]].ids.length; k++) {
+      manageLight(
+        values.areas[values.switchNames[i]].ids[k],
+        values.switchColors[values.switchNames[i]],
+        values.switches[values.switchNames[i]]
+      );
+    }
+  }
+}
+
+//#endregion
+
+//#region Light Functions
+async function loop(lights, colors, interval, runtime) {
+  var iterations = runtime / interval;
+  var colorIndex = 0;
+  for (var i = 0; i < iterations; i++) {
+    for (var k = 0; k < lights.length; k++) {
+      manageLight(lights[k], colors[colorIndex], true);
+    }
+    if (colorIndex == colors.length - 1) colorIndex = 0;
+    else colorIndex++;
+
+    await delay(interval);
+  }
+}
+
+async function sequence(lights, colors, interval, runtime) {
+  var iterations = runtime / interval;
+  var colorIndex = 0;
+  for (var i = 0; i < iterations; i++) {
+    for (var k = 0; k < lights.length; k++) {
+      manageLight(lights[k], colors[colorIndex], true);
+      if (colorIndex == colors.length - 1) colorIndex = 0;
+      else colorIndex++;
+    }
+    if (colorIndex == colors.length - 1) colorIndex = 0;
+    else colorIndex++;
+
+    await delay(interval);
+  }
+}
+
+//#endregion
+
+// loop(
+//   [1, 2],
+//   ["FF0000", "888800", "00FF00", "008888", "0000FF", "880088"],
+//   500,
+//   25000
+// );
+
+//sequence([1, 2, 3], ["FF0000", "00FF00", "0000FF"], 500, 25000);
+
 function getJson() {
   return (json = JSON.parse(
     fs.readFileSync(__dirname + "/values.json", "utf8")
@@ -153,21 +237,35 @@ function getValues() {
 
   for (var i = 0; i < values.switchNames.length; i++) {
     var name = values.switchNames[i];
-    if (values.switches[name] == true) {
-      on += "|" + values.switchNames[i] + "|" + values.switchColors[name];
-    }
+    on +=
+      "&" +
+      values.switchNames[i] +
+      "&" +
+      values.switchColors[name] +
+      "&" +
+      values.switches[name];
   }
   for (var i = 0; i < values.waterfallNames.length; i++) {
     var name = values.waterfallNames[i];
-    if (values.waterfalls[name] == true) {
-      on += "|" + values.waterfallNames[i];
-    }
+    on += "&" + values.waterfallNames[i] + "&" + values.waterfalls[name];
   }
 
   console.log("getValues: " + on);
 
   return on;
 }
+
+function getHSV(hex) {
+  var hsv = colorsys.hex2Hsv(hex);
+  // console.log(hsv);
+  hsv.h = Math.round(hsv.h * 182);
+  hsv.s = Math.round(hsv.s * 2.54);
+  hsv.v = Math.round(hsv.v * 2.54);
+  // console.log(hsv);
+  return hsv;
+}
+
+//#region Start Server
 
 // Create a server that invokes the `handler` function upon receiving a request
 var port;
@@ -193,6 +291,10 @@ http.createServer(handler).listen(port, "0.0.0.0", function (err) {
     }
   }
 });
+
+//#endregion
+
+//#region exit
 
 function clean() {
   if (values.hardware) {
@@ -240,3 +342,4 @@ process.on("SIGUSR2", exitHandler.bind(null, { exit: true }));
 
 //catches uncaught exceptions
 process.on("uncaughtException", exitHandler.bind(null, { exit: true }));
+//#endregion

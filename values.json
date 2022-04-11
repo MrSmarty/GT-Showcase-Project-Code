@@ -7,18 +7,18 @@
         "pondThree"
     ],
     "switches": {
-        "path": true,
-        "firepit": true,
+        "path": false,
+        "firepit": false,
         "pondOne": false,
-        "pondTwo": true,
-        "pondThree": true
+        "pondTwo": false,
+        "pondThree": false
     },
     "switchColors": {
-        "path": "#8f2d2d",
-        "firepit": "#4f4f4f",
-        "pondOne": "#1d9034",
-        "pondTwo": "#1968e6",
-        "pondThree": "#000000"
+        "path": "#a6ad48",
+        "firepit": "#1d1aff",
+        "pondOne": "#6bdd4b",
+        "pondTwo": "#c81e1e",
+        "pondThree": "#19b90e"
     },
     "waterfallNames": [
         "waterfallOne",
@@ -26,8 +26,8 @@
         "waterfallThree"
     ],
     "waterfalls": {
-        "waterfallOne": true,
-        "waterfallTwo": true,
+        "waterfallOne": false,
+        "waterfallTwo": false,
         "waterfallThree": false
     },
     "waterfallHeaders": {
@@ -39,6 +39,29 @@
         "waterfallOne": 1,
         "waterfallTwo": 2,
         "waterfallThree": 3
+    },
+    "areas": {
+        "path": {
+            "ids": [
+                1
+            ]
+        },
+        "firepit": {
+            "ids": [
+                2
+            ]
+        },
+        "pondOne": {
+            "ids": [
+                3
+            ]
+        },
+        "pondTwo": {
+            "ids": []
+        },
+        "pondThree": {
+            "ids": []
+        }
     },
     "hardware": false,
     "debug": false

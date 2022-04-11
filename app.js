@@ -219,7 +219,7 @@ async function sequence(lights, colors, interval, runtime) {
 
 loop(
   ["FF0000", "888800", "00FF00", "008888", "0000FF", "880088"],
-  [1, 2, 3],
+  [1, 2],
   500,
   25000
 );

@@ -208,12 +208,24 @@ async function sequence(lights, colors, interval, runtime) {
       if (colorIndex == colors.length - 1) colorIndex = 0;
       else colorIndex++;
     }
-    if (colorIndex == colors.length - 1) colorIndex = 0;
-    else colorIndex++;
+    if (lights.length == colors.length) {
+      if (colorIndex == colors.length - 1) colorIndex = 0;
+      else colorIndex++;
+    }
 
     await delay(interval);
   }
 }
+
+async function loop(lights, runtime) {
+  for (var i = 0; i < runtime; i++) {
+    for (var k = 0; k < lights.length; k++) {
+      // manageLight(lights[k], true);
+    }
+  }
+}
+
+async function loop(lights, colors, interval, runtime) { }
 
 //#endregion
 
@@ -224,7 +236,7 @@ async function sequence(lights, colors, interval, runtime) {
 //   25000
 // );
 
-//sequence([1, 2, 3], ["FF0000", "00FF00", "0000FF"], 500, 25000);
+// sequence([1, 2, 3], ["FFFFFF", "000000"], 1000, 25000);
 
 function getJson() {
   return (json = JSON.parse(
@@ -238,16 +250,16 @@ function getValues() {
   for (var i = 0; i < values.switchNames.length; i++) {
     var name = values.switchNames[i];
     on +=
-      "&" +
+      "|" +
       values.switchNames[i] +
-      "&" +
+      "|" +
       values.switchColors[name] +
-      "&" +
+      "|" +
       values.switches[name];
   }
   for (var i = 0; i < values.waterfallNames.length; i++) {
     var name = values.waterfallNames[i];
-    on += "&" + values.waterfallNames[i] + "&" + values.waterfalls[name];
+    on += "|" + values.waterfallNames[i] + "|" + values.waterfalls[name];
   }
 
   console.log("getValues: " + on);

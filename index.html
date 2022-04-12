@@ -33,6 +33,13 @@
       retrieveData();
     }
 
+    function submitCustom() {
+      document.forms["selection"]["custom"].checked = true;
+      ajax();
+      document.forms["selection"]["custom"].checked = false;
+      retrieveData();
+    }
+
     function ajax() {
       var formdata = "";
 
@@ -42,6 +49,8 @@
         formdata = "allOff";
       } else if (document.forms["selection"]["allOn"].checked == true) {
         formdata = "allOn";
+      } else if (document.forms["selection"]["custom"].checked == true) {
+        formdata = "custom:lights:";
       } else {
         for (var i = 0; i < document.forms["selection"].length; i++) {
           if (document.forms["selection"][i].checked == true) {
@@ -50,11 +59,11 @@
               document.forms["selection"][i].name.substring(0, 5) != "water"
             ) {
               // Send name
-              formdata += document.forms["selection"][i].name + "&";
+              formdata += document.forms["selection"][i].name + "|";
               // Send color
-              formdata += document.forms["selection"][i + 1].value + "&";
+              formdata += document.forms["selection"][i + 1].value + "|";
             } else {
-              formdata += document.forms["selection"][i].name + "&";
+              formdata += document.forms["selection"][i].name + "|";
             }
           }
         }
@@ -70,7 +79,7 @@
       xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
           document.getElementById("output").innerHTML = xmlhttp.responseText;
-          var response = xmlhttp.responseText.split("&");
+          var response = xmlhttp.responseText.split("|");
           if (response[0] == "values") {
             console.log("Setting values...\nLength: " + response.length);
 
@@ -364,6 +373,11 @@
         <option value="sequence">Sequence</option>
       </select>
       <textarea name="colors">FFFFFF</textarea>
+
+      <button onclick="submitCustom()">Submit Custom Data</button>
+      <label class="hidden">
+        <input type="checkbox" name="custom">
+      </label>
     </div>
 
     <!-- <input type="submit" value="Submit" class="submit" /> -->

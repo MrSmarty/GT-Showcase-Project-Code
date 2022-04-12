@@ -217,6 +217,16 @@ async function sequence(lights, colors, interval, runtime) {
   }
 }
 
+async function loop(lights, runtime) {
+  for (var i = 0; i < runtime; i++) {
+    for (var k = 0; k < lights.length; k++) {
+      // manageLight(lights[k], true);
+    }
+  }
+}
+
+async function loop(lights, colors, interval, runtime) {}
+
 //#endregion
 
 // loop(
@@ -226,7 +236,7 @@ async function sequence(lights, colors, interval, runtime) {
 //   25000
 // );
 
-sequence([1, 2, 3], ["FF0000", "00FF00", "00BBBB", "0000FF"], 1000, 25000);
+// sequence([1, 2, 3], ["FFFFFF", "000000"], 1000, 25000);
 
 function getJson() {
   return (json = JSON.parse(

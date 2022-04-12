@@ -226,7 +226,7 @@ async function sequence(lights, colors, interval, runtime) {
 //   25000
 // );
 
-sequence([1, 2, 3], ["FF0000", "00FF00", "008888", "0000FF"], 500, 25000);
+sequence([1, 2, 3], ["FF0000", "00FF00", "00BBBB", "0000FF"], 1000, 25000);
 
 function getJson() {
   return (json = JSON.parse(

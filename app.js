@@ -208,8 +208,10 @@ async function sequence(lights, colors, interval, runtime) {
       if (colorIndex == colors.length - 1) colorIndex = 0;
       else colorIndex++;
     }
-    if (colorIndex == colors.length - 1) colorIndex = 0;
-    else colorIndex++;
+    if (lights.length == colors.length) {
+      if (colorIndex == colors.length - 1) colorIndex = 0;
+      else colorIndex++;
+    }
 
     await delay(interval);
   }
@@ -224,7 +226,7 @@ async function sequence(lights, colors, interval, runtime) {
 //   25000
 // );
 
-//sequence([1, 2, 3], ["FF0000", "00FF00", "0000FF"], 500, 25000);
+sequence([1, 2, 3], ["FF0000", "00FF00", "0000FF"], 500, 25000);
 
 function getJson() {
   return (json = JSON.parse(

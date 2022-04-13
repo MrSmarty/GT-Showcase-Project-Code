@@ -84,6 +84,13 @@ function handler(req, res) {
           console.log(interval);
           console.log(duration);
           loop(lights, colors, interval, duration);
+        } else if (type == "sequence") {
+          console.log("beginning sequence...");
+          console.log(lights);
+          console.log(colors);
+          console.log(interval);
+          console.log(duration);
+          sequence(lights, colors, interval, duration);
         }
       } else {
         if (values.debug == true) {
@@ -219,6 +226,7 @@ async function loop(lights, colors, interval, runtime) {
 
     await delay(interval);
   }
+  console.log("done looping");
 }
 
 async function sequence(lights, colors, interval, runtime) {
@@ -239,15 +247,15 @@ async function sequence(lights, colors, interval, runtime) {
   }
 }
 
-async function loop(lights, runtime) {
-  for (var i = 0; i < runtime; i++) {
-    for (var k = 0; k < lights.length; k++) {
-      // manageLight(lights[k], true);
-    }
-  }
-}
+// async function loop(lights, runtime) {
+//   for (var i = 0; i < runtime; i++) {
+//     for (var k = 0; k < lights.length; k++) {
+//       // manageLight(lights[k], true);
+//     }
+//   }
+// }
 
-async function loop(lights, colors, interval, runtime) {}
+//async function loop(lights, colors, interval, runtime) {}
 
 //#endregion
 

@@ -68,14 +68,21 @@ function handler(req, res) {
         console.log("Custom Command");
         var parts = formdata.split("|");
         var type = parts[1];
-        var lights = parts[2].substring(7).split(" ");
-        var colors = parts[3].substring(7).split(" ");
+        var lights = parts[2].split(" ");
+        var colors = parts[3].split(" ");
         var interval = parts[4] * 1000;
         var duration = parts[5] * 1000;
-        console.log(lights);
+        for (var i = 0; i < lights.length; i++) {
+          lights[i] = parseInt(lights[i]);
+        }
+        console.log(parts);
 
         if (type == "loop") {
-          console.log("Loop");
+          console.log("beginning loop...");
+          console.log(lights);
+          console.log(colors);
+          console.log(interval);
+          console.log(duration);
           loop(lights, colors, interval, duration);
         }
       } else {

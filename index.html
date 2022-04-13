@@ -51,11 +51,13 @@
           formdata =
             "custom|" +
             document.forms["selection"]["select"].value +
-            "|lights " +
+            "|" +
             document.forms["selection"]["lights"].value +
-            "|colors " +
+            "|" +
             document.forms["selection"]["colors"].value +
+            "|" +
             document.forms["selection"]["interval"].value +
+            "|" +
             document.forms["selection"]["duration"].value;
         } else {
           for (var i = 0; i < document.forms["selection"].length; i++) {

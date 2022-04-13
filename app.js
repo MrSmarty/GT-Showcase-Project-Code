@@ -64,6 +64,34 @@ function handler(req, res) {
       } else if (formdata == "allOff") {
         allOff();
         form = "All lights are off";
+      } else if (formdata.substring(0, 7) == "custom|") {
+        console.log("Custom Command");
+        var parts = formdata.split("|");
+        var type = parts[1];
+        var lights = parts[2].split(" ");
+        var colors = parts[3].split(" ");
+        var interval = parts[4] * 1000;
+        var duration = parts[5] * 1000;
+        for (var i = 0; i < lights.length; i++) {
+          lights[i] = parseInt(lights[i]);
+        }
+        console.log(parts);
+
+        if (type == "loop") {
+          console.log("beginning loop...");
+          console.log(lights);
+          console.log(colors);
+          console.log(interval);
+          console.log(duration);
+          loop(lights, colors, interval, duration);
+        } else if (type == "sequence") {
+          console.log("beginning sequence...");
+          console.log(lights);
+          console.log(colors);
+          console.log(interval);
+          console.log(duration);
+          sequence(lights, colors, interval, duration);
+        }
       } else {
         if (values.debug == true) {
           form = "Input recieved: " + formdata;
@@ -186,6 +214,7 @@ function updateLights() {
 
 //#region Light Functions
 async function loop(lights, colors, interval, runtime) {
+  console.log("looping...");
   var iterations = runtime / interval;
   var colorIndex = 0;
   for (var i = 0; i < iterations; i++) {
@@ -197,6 +226,7 @@ async function loop(lights, colors, interval, runtime) {
 
     await delay(interval);
   }
+  console.log("done looping");
 }
 
 async function sequence(lights, colors, interval, runtime) {
@@ -217,15 +247,15 @@ async function sequence(lights, colors, interval, runtime) {
   }
 }
 
-async function loop(lights, runtime) {
-  for (var i = 0; i < runtime; i++) {
-    for (var k = 0; k < lights.length; k++) {
-      // manageLight(lights[k], true);
-    }
-  }
-}
+// async function loop(lights, runtime) {
+//   for (var i = 0; i < runtime; i++) {
+//     for (var k = 0; k < lights.length; k++) {
+//       // manageLight(lights[k], true);
+//     }
+//   }
+// }
 
-async function loop(lights, colors, interval, runtime) { }
+//async function loop(lights, colors, interval, runtime) {}
 
 //#endregion
 

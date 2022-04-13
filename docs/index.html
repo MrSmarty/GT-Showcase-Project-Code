@@ -6,6 +6,8 @@
   <title>Home</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="navBar.css" />
+  <link rel="stylesheet" href="dropdown.css" />
+  <script src="dropdown.js"></script>
 
   <meta charset="UTF-8" />
   <meta name="description" content="Lincoln's GT Showcase Project Site" />
@@ -16,7 +18,7 @@
 <body>
   <navbar>
     <ul>
-      <li><a class="active" href="index.html">Home</a></li>
+      <li><a class="activeNav" href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="https://waterscapemanager.ml">Project</a></li>
@@ -36,14 +38,16 @@
     </p>
   </div>
   <div class="block">
-    <h3>How it Works (Simplified):</h3>
-    <p>
-      The Raspberry Pi is a tiny computer that is connected to the internet.
-      It hosts a small website that waits for an input from a user. When it
-      recieves an input, it sends it back to the Pi. The Raspberry Pi then
-      decodes the input and figures out what to do with it. The Pi will then
-      tell the various components what to do and they will do it.
-    </p>
+    <button type="button" class="collapsible">How it Works (Simplified):</button>
+    <div class="content">
+      <p>
+        The Raspberry Pi is a tiny computer that is connected to the internet.
+        It hosts a small website that waits for an input from a user. When it
+        recieves an input, it sends it back to the Pi. The Raspberry Pi then
+        decodes the input and figures out what to do with it. The Pi will then
+        tell the various components what to do and they will do it.
+      </p>
+    </div>
   </div>
   <div class="block">
     <h3>How it Works:</h3>
@@ -93,8 +97,34 @@
     <h4>Controlling the Lights</h4>
     <p>
       Controlling the lights is a bit more complex. I used the Phillips-Hue Lighting system as a basis for the lights
-      for my project.
+      for my project. To control them, I send a PUT request to the IP of the bridge with all the states I want to set
+      (on/off, color, etc.). To specify which light, they are all assigned an ID. In order to control entire areas or
+      groups of lights, I have defined lists containing all the Ids of the lights in the areas.
     </p>
+  </div>
+  <h3>Pros and Cons</h3>
+  <div class="block">
+    <h4>Benefits to This System</h3>
+      <p>
+        The main benefit to using this system is the customization. A limiting factor of the built-in app when using
+        these lights is that each bulb can only be in a single "room". This works great, but we plan on using these
+        lights outside where they may overlap, eg. a green path that runs through a blue section. We want to be able to
+        keep the section blue when the path isn't on, but then switch it to green when the path is on. This system will
+        handle it all automatically. This also allows for scalibility. The base system can only have around 100 lights
+        or so before
+        it breaks. By using code, I can connect a second bridge to double the light capacity if required. Another
+        benefit
+        is that the controls for everything will all be in one place, making it simpler to control everything at once.
+        The
+        last advantage is synchronization. Because I can control everything from one place, I can synchronize the
+        various
+        parts together to create light shows or animation/effects.
+      </p>
+      <h4>Disadvantages</h4>
+      <p>
+        The biggest disadvantage is that there is a slightly smaller range of colors, but if you need something that
+        isn't on the picker, I'll have a custom input option or you could use the app.
+      </p>
   </div>
   <div class="block">
     <h3>Parts Used:</h3>

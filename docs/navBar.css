@@ -32,11 +32,11 @@ navbar li a {
   text-decoration: none;
 }
 
-navbar li a:hover:not(.active) {
+navbar li a:hover:not(.activeNav) {
   background-color: #d8973c;
 }
 
-.active {
+.activeNav {
   background-color: #d8973c;
 }
 

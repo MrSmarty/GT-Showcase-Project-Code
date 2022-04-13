@@ -64,6 +64,8 @@ function handler(req, res) {
       } else if (formdata == "allOff") {
         allOff();
         form = "All lights are off";
+      } else if (formdata.substring(0, 7) == "custom:") {
+        console.log("Custom Command");
       } else {
         if (values.debug == true) {
           form = "Input recieved: " + formdata;
@@ -225,7 +227,7 @@ async function loop(lights, runtime) {
   }
 }
 
-async function loop(lights, colors, interval, runtime) { }
+async function loop(lights, colors, interval, runtime) {}
 
 //#endregion
 

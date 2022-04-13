@@ -64,8 +64,20 @@ function handler(req, res) {
       } else if (formdata == "allOff") {
         allOff();
         form = "All lights are off";
-      } else if (formdata.substring(0, 7) == "custom:") {
+      } else if (formdata.substring(0, 7) == "custom|") {
         console.log("Custom Command");
+        var parts = formdata.split("|");
+        var type = parts[1];
+        var lights = parts[2].substring(7).split(" ");
+        var colors = parts[3].substring(7).split(" ");
+        var interval = parts[4] * 1000;
+        var duration = parts[5] * 1000;
+        console.log(lights);
+
+        if (type == "loop") {
+          console.log("Loop");
+          loop(lights, colors, interval, duration);
+        }
       } else {
         if (values.debug == true) {
           form = "Input recieved: " + formdata;
@@ -188,6 +200,7 @@ function updateLights() {
 
 //#region Light Functions
 async function loop(lights, colors, interval, runtime) {
+  console.log("looping...");
   var iterations = runtime / interval;
   var colorIndex = 0;
   for (var i = 0; i < iterations; i++) {

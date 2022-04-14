@@ -13,9 +13,7 @@
         "pondTwo": false,
         "pondThree": false,
         "custom": true,
-        "colors FFFFFF": true,
-        "path=on&pathColor=%23a6ad48&firepitColor=%231d1aff&pondOneColor=%236bdd4b&pondTwoColor=%23c81e1e&pondThreeColor=%2319b90e&select=loop&lights=1+2&colors=FFFFFF": true,
-        "path=on&pathColor=%23a6ad48&firepitColor=%231d1aff&pondOneColor=%236bdd4b&pondTwoColor=%23c81e1e&pondThreeColor=%2319b90e&select=loop&lights=1+2&colors=FF0000+00FF00+0000FF&interval=1&duration=5": true
+        "colors FFFFFF": true
     },
     "switchColors": {
         "path": "#059931",

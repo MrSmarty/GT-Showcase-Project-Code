@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RICKROLL!</title>
+    
+        <link rel="icon" href="favicon.ico?v=1" type="image/x-icon" />
+        <meta charset="UTF-8" />
+        <meta name="description" content="Lincoln's GT Showcase Project Site" />
+        <meta name="author" content="Lincoln Smith" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+    <body>
+<iframe id="iframe" width="998" height="561" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&showinfo=0&autoplay=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </body>
+    <script>
+        function onYouTubeIframeAPIReady() {
+    player = new YT.Player('iframe', {
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    player.unmute();
+    player.playVideo();
+}
+    </script>
+</html>

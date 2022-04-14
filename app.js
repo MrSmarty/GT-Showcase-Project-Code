@@ -2,6 +2,7 @@
 // Pi: 192.168.1.156:8006
 // Pi External: 107.217.165.178:8006
 // Hue IP: 192.168.1.111
+// Hue IP GT: 10.31.30.22
 // Hue manager: 6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh
 
 // Application
@@ -15,7 +16,7 @@ const { exec } = require("child_process");
 const nrc = require("node-run-cmd");
 const { captureRejections } = require("events");
 
-const bridgeIp = "192.168.1.111";
+const bridgeIp = "10.31.30.22";
 const username = "6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh";
 
 let values = getJson();

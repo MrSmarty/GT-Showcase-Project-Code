@@ -19,6 +19,7 @@ const bridgeIp = "192.168.1.111";
 const username = "6pLBMl94oEyehpbU1jeKwnGuuuuSpXYzBEiLKMdh";
 
 let values = getJson();
+let working = false;
 
 if (values.hardware) {
   var Gpio = require("onoff").Gpio;
@@ -62,7 +63,9 @@ function handler(req, res) {
         allOn();
         form = "All lights are on";
       } else if (formdata == "allOff") {
-        allOff();
+        if (!working) {
+          allOff();
+        }
         form = "All lights are off";
       } else if (formdata.substring(0, 7) == "custom|") {
         console.log("Custom Command");
@@ -217,6 +220,7 @@ async function loop(lights, colors, interval, runtime) {
   console.log("looping...");
   var iterations = runtime / interval;
   var colorIndex = 0;
+  working = true;
   for (var i = 0; i < iterations; i++) {
     for (var k = 0; k < lights.length; k++) {
       manageLight(lights[k], colors[colorIndex], true);
@@ -226,12 +230,15 @@ async function loop(lights, colors, interval, runtime) {
 
     await delay(interval);
   }
+  working = false;
   console.log("done looping");
+  updateLights();
 }
 
 async function sequence(lights, colors, interval, runtime) {
   var iterations = runtime / interval;
   var colorIndex = 0;
+  working = true;
   for (var i = 0; i < iterations; i++) {
     for (var k = 0; k < lights.length; k++) {
       manageLight(lights[k], colors[colorIndex], true);
@@ -245,6 +252,8 @@ async function sequence(lights, colors, interval, runtime) {
 
     await delay(interval);
   }
+  working = false;
+  updateLights();
 }
 
 // async function loop(lights, runtime) {

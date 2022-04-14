@@ -1,7 +1,5 @@
 # GT-Showcase-Project-Code
 
-# Copyright Lincoln Smith 2022
+This contains all the code for my 2021-2022 GT Showcase Project. For a more in-depth explanation, check out the presentation on GitHub Pages.
 
-# I will sue if you copy this...
-
-# JKJK
+Copyright Lincoln Smith 2022

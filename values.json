@@ -8,18 +8,18 @@
     ],
     "switches": {
         "path": true,
-        "firepit": false,
-        "pondOne": false,
+        "firepit": true,
+        "pondOne": true,
         "pondTwo": true,
         "pondThree": false,
         "custom": true,
         "colors FFFFFF": true
     },
     "switchColors": {
-        "path": "#059931",
-        "firepit": "#020094",
-        "pondOne": "#b82eac",
-        "pondTwo": "#011d57",
+        "path": "#3c071b",
+        "firepit": "#3c071b",
+        "pondOne": "#551029",
+        "pondTwo": "#5c0701",
         "pondThree": "#19b90e",
         "custom": "lights 1 2"
     },
@@ -29,7 +29,7 @@
         "waterfallThree"
     ],
     "waterfalls": {
-        "waterfallOne": false,
+        "waterfallOne": true,
         "waterfallTwo": false,
         "waterfallThree": false
     },

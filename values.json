@@ -16,10 +16,10 @@
         "colors FFFFFF": true
     },
     "switchColors": {
-        "path": "#3c071b",
-        "firepit": "#3c071b",
+        "path": "#1db5c9",
+        "firepit": "#3ccb3a",
         "pondOne": "#551029",
-        "pondTwo": "#5c0701",
+        "pondTwo": "#f6ae13",
         "pondThree": "#19b90e",
         "custom": "lights 1 2"
     },
